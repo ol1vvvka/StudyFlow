@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+﻿<?xml version="1.0" encoding="UTF-8" ?>
 <?xaml-comp compile="true" ?>
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
@@ -95,7 +95,7 @@
     <FontImageSource x:Key="IconAdd"
                 Glyph="{x:Static f:FluentUI.add_32_regular}"
                 FontFamily="{x:Static f:FluentUI.FontFamily}"
-                Color="{StaticResource White}"
+                Color="{StaticResource ActionText}"
                 Size="{StaticResource IconSize}" />
 
     <FontImageSource x:Key="IconDelete"
