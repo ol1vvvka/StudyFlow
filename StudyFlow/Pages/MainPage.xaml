@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+             xmlns:models="clr-namespace:StudyFlow.Models"
+             xmlns:controls="clr-namespace:StudyFlow.Pages.Controls"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             xmlns:pullToRefresh="clr-namespace:Syncfusion.Maui.Toolkit.PullToRefresh;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudyFlow.Pages.MainPage"
+             x:DataType="pageModels:MainPageModel"
+             x:Name="OverviewPage"
+             Title="{Binding Today}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference OverviewPage}, x:DataType=ContentPage}"
+                EventName="NavigatedTo"
+                Command="{Binding NavigatedToCommand}" />
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference OverviewPage}, x:DataType=ContentPage}"
+                EventName="NavigatedFrom"
+                Command="{Binding NavigatedFromCommand}" />
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference OverviewPage}, x:DataType=ContentPage}"
+                EventName="Appearing"
+                Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <toolkit:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="{x:Static strings:AppResources.NavSettings}"
+            IconImageSource="{StaticResource IconSettings}"
+            Command="{Binding OpenSettingsCommand}"
+            SemanticProperties.Description="{x:Static strings:AppResources.NavSettings}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <pullToRefresh:SfPullToRefresh
+            IsRefreshing="{Binding IsRefreshing}"
+            RefreshCommand="{Binding RefreshCommand}">
+            <pullToRefresh:SfPullToRefresh.PullableContent>
+                <ScrollView>
+                    <VerticalStackLayout Padding="{StaticResource LayoutPadding}" Spacing="{StaticResource LayoutSpacing}">
+
+                        <Label Text="{x:Static strings:AppResources.MainSubjectsHeader}" Style="{StaticResource Title2}" SemanticProperties.HeadingLevel="Level1"/>
+                        <Label
+                            Text="{x:Static strings:AppResources.MainNoSubjects}"
+                            IsVisible="{Binding HasSubjects, Converter={StaticResource InvertedBoolConverter}}"
+                            Style="{StaticResource Body2}" />
+                        <CollectionView ItemsSource="{Binding Subjects}"
+                                        IsVisible="{Binding HasSubjects}"
+                                        Margin="-7.5,0"
+                                        MinimumHeightRequest="200"
+                                        SelectionMode="Single"
+                                        SelectedItem="{Binding SelectedSubject}"
+                                        SelectionChangedCommand="{Binding NavigateToSubjectCommand, Source={RelativeSource AncestorType={x:Type pageModels:MainPageModel}}, x:DataType=pageModels:MainPageModel}"
+                                        SelectionChangedCommandParameter="{Binding SelectedSubject}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal" ItemSpacing="7.5"/>
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:Subject">
+                                    <controls:SubjectCardView WidthRequest="220" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Label Text="{x:Static strings:AppResources.MainRecentMaterials}" Style="{StaticResource Title2}" Margin="0,10,0,0" SemanticProperties.HeadingLevel="Level1"/>
+                        <Label
+                            Text="{x:Static strings:AppResources.MainNoMaterials}"
+                            IsVisible="{Binding HasRecentMaterials, Converter={StaticResource InvertedBoolConverter}}"
+                            Style="{StaticResource Body2}" />
+                        <VerticalStackLayout Spacing="{StaticResource LayoutSpacing}"
+                            BindableLayout.ItemsSource="{Binding RecentMaterials}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="models:Material">
+                                    <controls:MaterialView />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                        <Grid MinimumHeightRequest="44" Margin="0,10,0,0">
+                            <Label Text="{x:Static strings:AppResources.MainTasksHeader}" Style="{StaticResource Title2}" VerticalOptions="Center" SemanticProperties.HeadingLevel="Level1"/>
+                            <ImageButton
+                                Source="{StaticResource IconClean}"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center"
+                                Aspect="Center"
+                                HeightRequest="44"
+                                WidthRequest="44"
+                                IsVisible="{Binding HasCompletedTasks}"
+                                Command="{Binding CleanTasksCommand}"
+                                ToolTipProperties.Text="{x:Static strings:AppResources.CleanUp}"
+                                SemanticProperties.Description="{x:Static strings:AppResources.CleanUp}" />
+                        </Grid>
+                        <VerticalStackLayout Spacing="15"
+                            BindableLayout.ItemsSource="{Binding Tasks}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:TaskView TaskCompletedCommand="{Binding TaskCompletedCommand, Source={RelativeSource AncestorType={x:Type pageModels:MainPageModel}}, x:DataType=pageModels:MainPageModel}" />
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </ScrollView>
+            </pullToRefresh:SfPullToRefresh.PullableContent>
+        </pullToRefresh:SfPullToRefresh>
+
+        <controls:AddButton
+            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+            Command="{Binding AddTaskCommand}"
+            ToolTipProperties.Text="{x:Static strings:AppResources.AddTask}"
+            SemanticProperties.Description="{x:Static strings:AppResources.AddTask}" />
+    </Grid>
+</ContentPage>

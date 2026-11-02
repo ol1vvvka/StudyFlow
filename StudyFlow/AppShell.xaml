@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Phones get bottom tabs; Windows gets a sidebar that is always open -->
+<Shell
+    x:Class="StudyFlow.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:pages="clr-namespace:StudyFlow.Pages"
+    xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+    FlyoutBehavior="{OnPlatform WinUI=Locked, Default=Disabled}"
+    Shell.TabBarIsVisible="{OnPlatform WinUI=False, Default=True}"
+    Title="StudyFlow">
+
+    <Shell.FlyoutHeader>
+        <Label
+            Text="StudyFlow"
+            Style="{StaticResource Title2}"
+            TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+            Padding="20,20,20,12" />
+    </Shell.FlyoutHeader>
+
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+        <ShellContent
+            Title="{x:Static strings:AppResources.NavHome}"
+            Icon="{StaticResource IconDashboard}"
+            ContentTemplate="{DataTemplate pages:MainPage}"
+            Route="main" />
+
+        <ShellContent
+            Title="{x:Static strings:AppResources.NavSubjects}"
+            Icon="{StaticResource IconSubjects}"
+            ContentTemplate="{DataTemplate pages:SubjectListPage}"
+            Route="subjects" />
+
+        <ShellContent
+            Title="{x:Static strings:AppResources.NavNotes}"
+            Icon="{StaticResource IconNotes}"
+            ContentTemplate="{DataTemplate pages:NoteListPage}"
+            Route="notes" />
+
+        <ShellContent
+            Title="{x:Static strings:AppResources.NavMaterials}"
+            Icon="{StaticResource IconMaterials}"
+            ContentTemplate="{DataTemplate pages:MaterialListPage}"
+            Route="materials" />
+    </FlyoutItem>
+
+    <Shell.FlyoutFooter>
+        <Button
+            Text="{x:Static strings:AppResources.NavSettings}"
+            ImageSource="{StaticResource IconSettings}"
+            Style="{StaticResource SecondaryButton}"
+            BorderWidth="0"
+            HorizontalOptions="Start"
+            Margin="8,8,8,16"
+            Clicked="OnSettingsClicked" />
+    </Shell.FlyoutFooter>
+
+</Shell>

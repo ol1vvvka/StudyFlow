@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+             xmlns:models="clr-namespace:StudyFlow.Models"
+             xmlns:controls="clr-namespace:StudyFlow.Pages.Controls"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudyFlow.Pages.NoteListPage"
+             x:Name="NoteList"
+             x:DataType="pageModels:NoteListPageModel"
+             Title="{x:Static strings:AppResources.NavNotes}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference NoteList}, x:DataType=ContentPage}"
+                EventName="Appearing"
+                Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+
+    <Grid>
+        <Grid RowDefinitions="Auto,*" Padding="{StaticResource LayoutPadding}" RowSpacing="{StaticResource LayoutSpacing}">
+            <SearchBar
+                Text="{Binding SearchText}"
+                Placeholder="{x:Static strings:AppResources.NotesSearch}"
+                SemanticProperties.Description="{x:Static strings:AppResources.NotesSearch}" />
+
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Notes}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="{Binding EmptyText}" Style="{StaticResource Body2}" Margin="0,20" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="7.5" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Note">
+                        <controls:NoteView />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <controls:AddButton
+            Command="{Binding AddNoteCommand}"
+            SemanticProperties.Description="{x:Static strings:AppResources.AddNote}"
+            ToolTipProperties.Text="{x:Static strings:AppResources.AddNote}" />
+    </Grid>
+</ContentPage>

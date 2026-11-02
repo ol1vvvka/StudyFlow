@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+             xmlns:models="clr-namespace:StudyFlow.Models"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudyFlow.Pages.NoteDetailPage"
+             x:DataType="pageModels:NoteDetailPageModel"
+             x:Name="NotePage"
+             Title="{x:Static strings:AppResources.NoteTitle}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference NotePage}, x:DataType=ContentPage}"
+                EventName="NavigatedFrom"
+                Command="{Binding NavigatedFromCommand}" />
+    </ContentPage.Behaviors>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="{x:Static strings:AppResources.Delete}"
+            Command="{Binding DeleteCommand}"
+            Order="Primary"
+            Priority="0"
+            IconImageSource="{StaticResource IconDelete}"
+            SemanticProperties.Description="{x:Static strings:AppResources.DeleteNoteTitle}" />
+        <ToolbarItem
+            Text="{x:Static strings:AppResources.Done}"
+            Command="{Binding DoneCommand}"
+            Order="Primary"
+            Priority="1"
+            IconImageSource="{StaticResource IconDone}"
+            SemanticProperties.Description="{x:Static strings:AppResources.Done}" />
+    </ContentPage.ToolbarItems>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="{StaticResource LayoutPadding}" Spacing="{StaticResource LayoutSpacing}">
+            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+                <Picker
+                    Title="{x:Static strings:AppResources.NoteSubject}"
+                    ItemsSource="{Binding Subjects}"
+                    ItemDisplayBinding="{Binding Name, x:DataType=models:Subject}"
+                    SelectedItem="{Binding Subject}"
+                    HorizontalOptions="Start"
+                    MinimumWidthRequest="200"
+                    SemanticProperties.Description="{x:Static strings:AppResources.NoteSubject}" />
+                <Label
+                    Grid.Column="1"
+                    Text="{Binding Status}"
+                    Style="{StaticResource Caption1}"
+                    TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"
+                    VerticalOptions="Center" />
+            </Grid>
+
+            <Entry
+                Text="{Binding Title}"
+                Placeholder="{x:Static strings:AppResources.NoteTitlePlaceholder}"
+                FontSize="{OnIdiom 22, Desktop=26}"
+                SemanticProperties.Description="{x:Static strings:AppResources.NoteTitlePlaceholder}" />
+
+            <Editor
+                Text="{Binding Content}"
+                Placeholder="{x:Static strings:AppResources.NoteContentPlaceholder}"
+                AutoSize="TextChanges"
+                MinimumHeightRequest="320"
+                FontSize="17"
+                SemanticProperties.Description="{x:Static strings:AppResources.NoteContentPlaceholder}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

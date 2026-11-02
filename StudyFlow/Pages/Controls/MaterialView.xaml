@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:controls="clr-namespace:StudyFlow.Pages.Controls"
+        xmlns:models="clr-namespace:StudyFlow.Models"
+        xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+        xmlns:fonts="clr-namespace:Fonts"
+        xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+        x:Class="StudyFlow.Pages.Controls.MaterialView"
+        x:Name="Root"
+        x:DataType="models:Material"
+        Style="{StaticResource CardStyle}"
+        Padding="{OnIdiom '12,8', Desktop='16,10'}"
+        SemanticProperties.Description="{Binding AccessibilityDescription}">
+
+    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+        <!-- Transparent background makes the whole area tappable on Windows -->
+        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12" BackgroundColor="Transparent">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer
+                    Command="{Binding OpenMaterialCommand, Source={RelativeSource AncestorType={x:Type pageModels:IMaterialPageModel}}, x:DataType=pageModels:IMaterialPageModel}"
+                    CommandParameter="{Binding .}" />
+            </Grid.GestureRecognizers>
+
+            <Border
+                WidthRequest="44"
+                HeightRequest="44"
+                Padding="0"
+                StrokeShape="RoundRectangle 10"
+                BackgroundColor="{Binding SubjectDisplayColor}"
+                VerticalOptions="Center">
+                <Grid>
+                    <Label
+                        Text="{Binding KindGlyph}"
+                        FontFamily="{x:Static fonts:FluentUI.FontFamily}"
+                        FontSize="22"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                    <Image
+                        Source="{Binding Thumbnail}"
+                        Aspect="AspectFill"
+                        IsVisible="{Binding IsImage}" />
+                </Grid>
+            </Border>
+
+            <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                <Label
+                    Text="{Binding SubjectName}"
+                    Style="{StaticResource Caption1Strong}"
+                    TextColor="{Binding SubjectDisplayColor}"
+                    IsVisible="{Binding ShowSubject, Source={x:Reference Root}, x:DataType=controls:MaterialView}"
+                    MaxLines="1"
+                    LineBreakMode="TailTruncation" />
+                <Label
+                    Text="{Binding Title}"
+                    Style="{StaticResource Body1Strong}"
+                    MaxLines="1"
+                    LineBreakMode="TailTruncation" />
+                <HorizontalStackLayout Spacing="4">
+                    <Label
+                        Text="{Binding SyncGlyph}"
+                        IsVisible="{Binding ShowSync}"
+                        FontFamily="{x:Static fonts:FluentUI.FontFamily}"
+                        FontSize="14"
+                        TextColor="{Binding SyncColor}"
+                        VerticalOptions="Center"
+                        ToolTipProperties.Text="{Binding SyncError}" />
+                    <Label
+                        Text="{Binding Details}"
+                        Style="{StaticResource Caption1}"
+                        TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"
+                        MaxLines="1"
+                        LineBreakMode="TailTruncation" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+        </Grid>
+
+        <ImageButton
+            Grid.Column="1"
+            Source="{StaticResource IconMore}"
+            WidthRequest="44"
+            HeightRequest="44"
+            Aspect="Center"
+            VerticalOptions="Center"
+            BackgroundColor="Transparent"
+            Command="{Binding MaterialActionsCommand, Source={RelativeSource AncestorType={x:Type pageModels:IMaterialPageModel}}, x:DataType=pageModels:IMaterialPageModel}"
+            CommandParameter="{Binding .}"
+            ToolTipProperties.Text="{x:Static strings:AppResources.MaterialActions}"
+            SemanticProperties.Description="{x:Static strings:AppResources.MaterialActions}" />
+    </Grid>
+</Border>

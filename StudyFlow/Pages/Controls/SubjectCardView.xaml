@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:controls="clr-namespace:StudyFlow.Pages.Controls"
+        xmlns:models="clr-namespace:StudyFlow.Models"
+        xmlns:fonts="clr-namespace:Fonts"
+        xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+        xmlns:shimmer="clr-namespace:Syncfusion.Maui.Toolkit.Shimmer;assembly=Syncfusion.Maui.Toolkit"
+        x:Class="StudyFlow.Pages.Controls.SubjectCardView"
+        SemanticProperties.Description="{Binding AccessibilityDescription}"
+        Style="{StaticResource CardStyle}"
+        MinimumHeightRequest="200"
+        x:DataType="models:Subject">
+    <shimmer:SfShimmer
+        BackgroundColor="Transparent"
+        IsActive="{Binding IsBusy, Source={RelativeSource AncestorType={x:Type pageModels:MainPageModel}}, x:DataType=pageModels:ITaskPageModel}">
+        <shimmer:SfShimmer.CustomView>
+            <VerticalStackLayout Spacing="15">
+                <BoxView
+                    CornerRadius="48"
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    Style="{StaticResource ShimmerCustomViewStyle}"/>
+                <BoxView
+                    HeightRequest="24"
+                    Style="{StaticResource ShimmerCustomViewStyle}"/>
+                <BoxView
+                    HeightRequest="48"
+                    Style="{StaticResource ShimmerCustomViewStyle}"/>
+            </VerticalStackLayout>
+        </shimmer:SfShimmer.CustomView>
+        <shimmer:SfShimmer.Content>
+            <VerticalStackLayout Spacing="10">
+                <Border
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    Padding="0"
+                    StrokeShape="RoundRectangle 22"
+                    BackgroundColor="{Binding DisplayColor}"
+                    HorizontalOptions="Start">
+                    <Label
+                        Text="{Binding Icon}"
+                        FontFamily="{x:Static fonts:FluentUI.FontFamily}"
+                        FontSize="22"
+                        TextColor="White"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Border>
+                <Label Text="{Binding Name}" Style="{StaticResource Body1Strong}" FontSize="16" LineBreakMode="WordWrap"/>
+                <Label
+                    Text="{Binding Teacher}"
+                    IsVisible="{Binding HasTeacher}"
+                    Style="{StaticResource Caption1}"
+                    TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+                <Label
+                    Text="{Binding Stats}"
+                    Style="{StaticResource Caption1}"
+                    TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray400}}"/>
+                <FlexLayout Wrap="Wrap" Direction="Row" AlignItems="Start" JustifyContent="Start" BindableLayout.ItemsSource="{Binding Tags}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Tag">
+                            <controls:TagView Margin="0,0,6,6" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </shimmer:SfShimmer.Content>
+    </shimmer:SfShimmer>
+</Border>

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+             xmlns:models="clr-namespace:StudyFlow.Models"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.SegmentedControl;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:DataType="pageModels:SettingsPageModel"
+             x:Class="StudyFlow.Pages.SettingsPage"
+             x:Name="Settings"
+             Title="{x:Static strings:AppResources.NavSettings}">
+
+    <ContentPage.Behaviors>
+        <toolkit:EventToCommandBehavior
+                BindingContext="{Binding Path=BindingContext, Source={x:Reference Settings}, x:DataType=ContentPage}"
+                EventName="Appearing"
+                Command="{Binding AppearingCommand}" />
+    </ContentPage.Behaviors>
+    <ContentPage.Resources>
+        <Style x:Key="InvalidEntryStyle" TargetType="Entry">
+            <Setter Property="TextColor" Value="Red" />
+        </Style>
+
+        <Style TargetType="Entry">
+            <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" />
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="FontFamily" Value="NunitoRegular"/>
+            <Setter Property="FontSize" Value="{OnIdiom 16,Desktop=20}" />
+            <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" />
+            <Setter Property="MinimumHeightRequest" Value="44"/>
+            <Setter Property="MinimumWidthRequest" Value="44"/>
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Disabled">
+                            <VisualState.Setters>
+                                <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray300}, Dark={StaticResource Gray600}}" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="{StaticResource LayoutSpacing}" Padding="{StaticResource LayoutPadding}">
+
+            <Label Text="{x:Static strings:AppResources.YandexHeader}" Style="{StaticResource Title2}" />
+
+            <VerticalStackLayout IsVisible="{Binding IsSignedOut}" Spacing="10" Margin="0,0,0,20">
+                <Label Text="{x:Static strings:AppResources.YandexSignInHint}" Style="{StaticResource Body2}" />
+                <HorizontalStackLayout Spacing="10">
+                    <Button Text="{x:Static strings:AppResources.YandexSignIn}" Command="{Binding SignInCommand}" />
+                    <Button
+                        Text="{x:Static strings:AppResources.Cancel}"
+                        Command="{Binding CancelSignInCommand}"
+                        IsVisible="{Binding IsSigningIn}"
+                        Style="{StaticResource SecondaryButton}" />
+                </HorizontalStackLayout>
+                <Label
+                    Text="{x:Static strings:AppResources.YandexWaitingForBrowser}"
+                    IsVisible="{Binding IsSigningIn}"
+                    Style="{StaticResource Caption1}"
+                    TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+            </VerticalStackLayout>
+
+            <Border Style="{StaticResource CardStyle}" IsVisible="{Binding IsSignedIn}" Margin="0,0,0,20">
+                <VerticalStackLayout Spacing="12">
+                <Grid ColumnDefinitions="Auto,*,Auto" ColumnSpacing="15">
+                    <Border
+                        WidthRequest="48"
+                        HeightRequest="48"
+                        Padding="0"
+                        StrokeShape="RoundRectangle 24"
+                        BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource Gray600}}"
+                        VerticalOptions="Center">
+                        <Image Source="{Binding Avatar}" Aspect="AspectFill" />
+                    </Border>
+                    <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                        <Label Text="{Binding UserName}" Style="{StaticResource Body1Strong}" />
+                        <Label
+                            Text="{Binding UserLogin}"
+                            Style="{StaticResource Caption1}"
+                            TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+                        <Label
+                            Text="{Binding DiskUsage}"
+                            Style="{StaticResource Caption1}"
+                            TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+                    </VerticalStackLayout>
+                    <Button
+                        Grid.Column="2"
+                        Text="{x:Static strings:AppResources.YandexSignOut}"
+                        Command="{Binding SignOutCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        VerticalOptions="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                    <Label
+                        Text="{Binding SyncStatusText}"
+                        Style="{StaticResource Body2}"
+                        VerticalOptions="Center" />
+                    <Button
+                        Grid.Column="1"
+                        Text="{x:Static strings:AppResources.CloudSyncNow}"
+                        Command="{Binding SyncNowCommand}"
+                        Style="{StaticResource SecondaryButton}"
+                        VerticalOptions="Center" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="15">
+                    <Label
+                        Text="{x:Static strings:AppResources.CloudWifiOnly}"
+                        Style="{StaticResource Body2}"
+                        VerticalOptions="Center" />
+                    <Switch
+                        Grid.Column="1"
+                        IsToggled="{Binding WifiOnly}"
+                        VerticalOptions="Center"
+                        SemanticProperties.Description="{x:Static strings:AppResources.CloudWifiOnly}" />
+                </Grid>
+                </VerticalStackLayout>
+            </Border>
+
+            <Label Text="{x:Static strings:AppResources.ThemeHeader}" Style="{StaticResource Title2}" />
+            <sf:SfSegmentedControl
+                x:Name="ThemeSegmentedControl"
+                HorizontalOptions="Start"
+                SegmentWidth="{OnIdiom 104, Desktop=140}"
+                SegmentHeight="40"
+                Margin="0,0,0,20"
+                Stroke="{AppThemeBinding Light={StaticResource Gray200Brush}, Dark={StaticResource Gray600Brush}}"
+                SelectionChanged="ThemeSegmentedControl_SelectionChanged">
+                <sf:SfSegmentedControl.TextStyle>
+                    <sf:SegmentTextStyle
+                        TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}"
+                        FontFamily="NunitoSemiBold"
+                        FontSize="14" />
+                </sf:SfSegmentedControl.TextStyle>
+                <sf:SfSegmentedControl.SelectionIndicatorSettings>
+                    <sf:SelectionIndicatorSettings
+                        Background="{StaticResource ActionBackgroundBrush}"
+                        TextColor="{StaticResource ActionText}" />
+                </sf:SfSegmentedControl.SelectionIndicatorSettings>
+                <sf:SfSegmentedControl.ItemsSource>
+                    <x:Array Type="{x:Type sf:SfSegmentItem}">
+                        <sf:SfSegmentItem Text="{x:Static strings:AppResources.ThemeSystem}" />
+                        <sf:SfSegmentItem Text="{x:Static strings:AppResources.ThemeLight}" />
+                        <sf:SfSegmentItem Text="{x:Static strings:AppResources.ThemeDark}" />
+                    </x:Array>
+                </sf:SfSegmentedControl.ItemsSource>
+            </sf:SfSegmentedControl>
+
+            <Label Text="{x:Static strings:AppResources.Tags}" Style="{StaticResource Title2}" />
+            <VerticalStackLayout Spacing="{StaticResource LayoutSpacing}"
+                BindableLayout.ItemsSource="{Binding Tags}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="models:Tag">
+                        <Grid ColumnSpacing="{StaticResource LayoutSpacing}" ColumnDefinitions="4*,3*,30,Auto">
+                            <Entry Text="{Binding Title}" Grid.Column="0" SemanticProperties.Description="{Binding Title}" />
+                            <Entry Text="{Binding Color}" Grid.Column="1" x:Name="ColorEntry"
+                                SemanticProperties.Description="{Binding Title}"
+                                SemanticProperties.Hint="{x:Static strings:AppResources.TagColorHint}">
+                                <Entry.Behaviors>
+                                    <toolkit:TextValidationBehavior
+                                        InvalidStyle="{StaticResource InvalidEntryStyle}"
+                                        Flags="ValidateOnUnfocused"
+                                        RegexPattern="^#(?:[0-9a-fA-F]{3}){1,2}$" />
+                                </Entry.Behaviors>
+                            </Entry>
+
+                            <BoxView HeightRequest="30" WidthRequest="30" CornerRadius="15" VerticalOptions="Center"
+                                Color="{Binding Text, Source={x:Reference ColorEntry}, x:DataType=Entry}" Grid.Column="2"
+                                SemanticProperties.HeadingLevel="None" />
+
+                            <ImageButton
+                                Source="{StaticResource IconDelete}"
+                                WidthRequest="44"
+                                HeightRequest="44"
+                                Aspect="Center"
+                                BackgroundColor="Transparent"
+                                SemanticProperties.Description="{Binding Title, StringFormat={x:Static strings:AppResources.DeleteTagFormat}}"
+                                Command="{Binding DeleteTagCommand, Source={RelativeSource AncestorType={x:Type pageModels:SettingsPageModel}}, x:DataType=pageModels:SettingsPageModel}" CommandParameter="{Binding .}"
+                                Grid.Column="3"/>
+                        </Grid>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout Spacing="10" Margin="0,10,0,20">
+                <Button Text="{x:Static strings:AppResources.Save}" Command="{Binding SaveTagsCommand}" />
+                <Button Text="{x:Static strings:AppResources.AddTag}" Command="{Binding AddTagCommand}" Style="{StaticResource SecondaryButton}" />
+            </HorizontalStackLayout>
+
+            <Label Text="{x:Static strings:AppResources.DemoHeader}" Style="{StaticResource Title2}" />
+            <Label Text="{x:Static strings:AppResources.DemoDescription}" Style="{StaticResource Body2}" />
+            <Button
+                Text="{x:Static strings:AppResources.ResetDemo}"
+                Command="{Binding ResetCommand}"
+                Style="{StaticResource SecondaryButton}"
+                HorizontalOptions="Start"
+                Margin="0,5,0,20" />
+
+            <Label
+                Text="{Binding Version}"
+                Style="{StaticResource Caption1}"
+                TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

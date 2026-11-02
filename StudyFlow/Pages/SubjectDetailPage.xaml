@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+             xmlns:models="clr-namespace:StudyFlow.Models"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:controls="clr-namespace:StudyFlow.Pages.Controls"
+             xmlns:fonts="clr-namespace:Fonts"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             x:Class="StudyFlow.Pages.SubjectDetailPage"
+             x:DataType="pageModels:SubjectDetailPageModel"
+             Title="{x:Static strings:AppResources.SubjectTitle}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="{x:Static strings:AppResources.Delete}"
+            Command="{Binding DeleteCommand}"
+            Order="Primary"
+            Priority="0"
+            IconImageSource="{StaticResource IconDelete}"
+            SemanticProperties.Description="{x:Static strings:AppResources.DeleteSubjectTitle}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="{StaticResource LayoutPadding}" Spacing="{StaticResource LayoutSpacing}">
+                <sf:SfTextInputLayout
+                    Hint="{x:Static strings:AppResources.SubjectName}" >
+                    <Entry
+                        Text="{Binding Name}" SemanticProperties.Description="{x:Static strings:AppResources.SubjectName}" />
+                </sf:SfTextInputLayout>
+
+                <sf:SfTextInputLayout
+                    Hint="{x:Static strings:AppResources.SubjectTeacher}">
+                    <Entry
+                        Text="{Binding Teacher}" SemanticProperties.Description="{x:Static strings:AppResources.SubjectTeacher}" />
+                </sf:SfTextInputLayout>
+
+                <sf:SfTextInputLayout
+                    Hint="{x:Static strings:AppResources.SubjectDescription}">
+                    <Entry
+                        Text="{Binding Description}" SemanticProperties.Description="{x:Static strings:AppResources.SubjectDescription}" />
+                </sf:SfTextInputLayout>
+
+                <Label
+                    Text="{x:Static strings:AppResources.SubjectIcon}"
+                    Style="{StaticResource Title2}"/>
+                <CollectionView
+                    HeightRequest="44" Margin="0,0,0,15"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding Icon}"
+                    SelectionChangedCommand="{Binding IconSelectedCommand}"
+                    SelectionChangedCommandParameter="{Binding Icon}"
+                    ItemsSource="{Binding IconOptions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:IconData">
+                            <Grid RowDefinitions="Auto,4" RowSpacing="{StaticResource size60}"
+                                 SemanticProperties.Description="{Binding Description}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                                <Setter TargetName="SelectedIndicator" Property="BoxView.IsVisible" Value="False"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter TargetName="SelectedIndicator" Property="BoxView.IsVisible" Value="True"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <Label
+                                    Text="{Binding Icon}"
+                                    FontFamily="{x:Static fonts:FluentUI.FontFamily}"
+                                    FontSize="24"
+                                    VerticalOptions="Center"
+                                    HorizontalOptions="Center"
+                                    TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground},Dark={StaticResource LightOnDarkBackground}}"/>
+                                <BoxView x:Name="SelectedIndicator" Color="{StaticResource Primary}" HeightRequest="4" HorizontalOptions="Fill" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{StaticResource LayoutSpacing}"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+                <Label
+                    Text="{x:Static strings:AppResources.SubjectColor}"
+                    Style="{StaticResource Title2}"/>
+                <CollectionView
+                    HeightRequest="44" Margin="0,0,0,15"
+                    SelectionMode="Single"
+                    SelectedItem="{Binding Color}"
+                    SelectionChangedCommand="{Binding ColorSelectedCommand}"
+                    SelectionChangedCommandParameter="{Binding Color}"
+                    ItemsSource="{Binding ColorOptions}">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:ColorData">
+                            <Grid RowDefinitions="Auto,4" RowSpacing="{StaticResource size60}"
+                                 SemanticProperties.Description="{Binding Description}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                                <Setter TargetName="SelectedIndicator" Property="BoxView.IsVisible" Value="False"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="Transparent"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                                <Setter TargetName="SelectedIndicator" Property="BoxView.IsVisible" Value="True"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+
+                                <BoxView
+                                    Color="{Binding Color}"
+                                    WidthRequest="28"
+                                    HeightRequest="28"
+                                    CornerRadius="14"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"/>
+                                <BoxView x:Name="SelectedIndicator" Color="{StaticResource Primary}" HeightRequest="4" HorizontalOptions="Fill" Grid.Row="1"/>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{StaticResource LayoutSpacing}"/>
+                    </CollectionView.ItemsLayout>
+                </CollectionView>
+
+                <Label
+                    Text="{x:Static strings:AppResources.Tags}"
+                    Style="{StaticResource Title2}"/>
+
+                <CollectionView
+                    ItemsSource="{Binding AllTags}"
+                    SelectionMode="Multiple"
+                    HeightRequest="44"
+                    Margin="0,0,0,15"
+                    SelectedItems="{Binding SelectedTags, Mode=TwoWay}"
+                    SelectionChangedCommand="{Binding SelectionChangedCommand}"
+                    SelectionChangedCommandParameter="{Binding SelectedTags}"
+                    SemanticProperties.Description="{x:Static strings:AppResources.Tags}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal" ItemSpacing="{StaticResource LayoutSpacing}" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="models:Tag">
+                            <Border StrokeShape="RoundRectangle 22"
+                                HeightRequest="44"
+                                VerticalOptions="Center"
+                                Padding="{OnPlatform '18,0,18,8',Android='18,0,18,0'}"
+                                SemanticProperties.Description="{Binding Title}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualState x:Name="Normal">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSecondaryBackground},Dark={StaticResource DarkSecondaryBackground}}"/>
+                                                <Setter TargetName="TagLabel" Property="Label.TextColor" Value="{AppThemeBinding Light={StaticResource DarkOnLightBackground},Dark={StaticResource LightOnDarkBackground}}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                        <VisualState x:Name="Selected">
+                                            <VisualState.Setters>
+                                                <Setter Property="BackgroundColor" Value="{Binding DisplayColor}"/>
+                                                <Setter TargetName="TagLabel" Property="Label.TextColor" Value="{AppThemeBinding Light={StaticResource LightBackground},Dark={StaticResource DarkBackground}}"/>
+                                            </VisualState.Setters>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <Label x:Name="TagLabel"
+                                    Text="{Binding Title}"
+                                    TextColor="{AppThemeBinding Light={StaticResource LightBackground},Dark={StaticResource DarkBackground}}"
+                                    FontSize="{OnIdiom 16,Desktop=18}"
+                                    VerticalOptions="Center"
+                                    VerticalTextAlignment="Center">
+                                </Label>
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+
+                <Button Text="{x:Static strings:AppResources.Save}"
+                    MinimumHeightRequest="{OnIdiom 44, Desktop=60}"
+                    Command="{Binding SaveCommand}" />
+
+                <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="44" Margin="0,15,0,0">
+                    <Label
+                        Text="{x:Static strings:AppResources.MaterialsHeader}"
+                        Style="{StaticResource Title2}"
+                        VerticalOptions="Center"/>
+                    <Button
+                        Grid.Column="1"
+                        Text="{x:Static strings:AppResources.AddMaterial}"
+                        IsVisible="{Binding IsExisting}"
+                        Command="{Binding AddMaterialCommand}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Label
+                    Text="{x:Static strings:AppResources.MaterialsSaveSubjectFirst}"
+                    IsVisible="{Binding IsNew}"
+                    Style="{StaticResource Body2}" />
+                <Label
+                    Text="{x:Static strings:AppResources.MaterialsEmpty}"
+                    IsVisible="{Binding HasNoMaterials}"
+                    Style="{StaticResource Body2}" />
+                <VerticalStackLayout
+                    Spacing="{StaticResource LayoutSpacing}"
+                    BindableLayout.ItemsSource="{Binding Materials}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Material">
+                            <controls:MaterialView ShowSubject="False" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Grid ColumnDefinitions="*,Auto" MinimumHeightRequest="44" Margin="0,15,0,0" IsVisible="{Binding IsExisting}">
+                    <Label
+                        Text="{x:Static strings:AppResources.NotesHeader}"
+                        Style="{StaticResource Title2}"
+                        VerticalOptions="Center"/>
+                    <Button
+                        Grid.Column="1"
+                        Text="{x:Static strings:AppResources.AddNote}"
+                        Command="{Binding AddNoteCommand}"
+                        VerticalOptions="Center" />
+                </Grid>
+                <Label
+                    Text="{x:Static strings:AppResources.NotesEmpty}"
+                    IsVisible="{Binding HasNoNotes}"
+                    Style="{StaticResource Body2}" />
+                <VerticalStackLayout
+                    Spacing="{StaticResource LayoutSpacing}"
+                    BindableLayout.ItemsSource="{Binding Notes}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:Note">
+                            <controls:NoteView ShowSubject="False" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+
+                <Grid HeightRequest="44" Margin="0,15,0,0">
+                    <Label
+                        Text="{x:Static strings:AppResources.MainTasksHeader}"
+                        Style="{StaticResource Title2}"
+                        VerticalOptions="Center"/>
+                    <ImageButton
+                        Source="{StaticResource IconClean}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        Aspect="Center"
+                        HeightRequest="44"
+                        WidthRequest="44"
+                        IsVisible="{Binding HasCompletedTasks}"
+                        Command="{Binding CleanTasksCommand}"
+                        ToolTipProperties.Text="{x:Static strings:AppResources.CleanUp}"
+                        SemanticProperties.Description="{x:Static strings:AppResources.CleanUp}"
+                        />
+                </Grid>
+                <!-- Bottom margin keeps the last task clear of the floating add button -->
+                <VerticalStackLayout
+                    Spacing="{StaticResource LayoutSpacing}"
+                    Margin="0,0,0,80"
+                    BindableLayout.ItemsSource="{Binding Tasks}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <controls:TaskView TaskCompletedCommand="{Binding TaskCompletedCommand, Source={RelativeSource AncestorType={x:Type pageModels:SubjectDetailPageModel}}, x:DataType=pageModels:SubjectDetailPageModel}" />
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <controls:AddButton Command="{Binding AddTaskCommand}"
+                            SemanticProperties.Description="{x:Static strings:AppResources.AddTask}"
+                            ToolTipProperties.Text="{x:Static strings:AppResources.AddTask}" />
+    </Grid>
+
+</ContentPage>

@@ -1,0 +1,78 @@
+{
+    "Subjects": [
+        {
+            "Name": "Математический анализ",
+            "Teacher": "Иванов И. И.",
+            "Description": "Пределы, производные, интегралы",
+            "Icon": "",
+            "Color": "#512BD4",
+            "Tags": [
+                { "Title": "экзамен", "Color": "#E0245E" }
+            ],
+            "Tasks": [
+                { "Title": "Решить ДЗ №5 по интегралам", "IsCompleted": false },
+                { "Title": "Подготовиться к коллоквиуму", "IsCompleted": false },
+                { "Title": "Повторить таблицу производных", "IsCompleted": true }
+            ],
+            "Notes": [
+                {
+                    "Title": "Основные интегралы",
+                    "Content": "∫ xⁿ dx = xⁿ⁺¹ / (n + 1) + C, n ≠ −1\n∫ 1/x dx = ln|x| + C\n∫ eˣ dx = eˣ + C\n∫ sin x dx = −cos x + C\n∫ cos x dx = sin x + C\n\nНе забывать про константу C!"
+                },
+                {
+                    "Title": "Вопросы к коллоквиуму",
+                    "Content": "1. Определение предела последовательности\n2. Замечательные пределы\n3. Непрерывность функции в точке"
+                }
+            ]
+        },
+        {
+            "Name": "История России",
+            "Teacher": "Петрова А. С.",
+            "Description": "Семинары и реферат",
+            "Icon": "",
+            "Color": "#D4A017",
+            "Tags": [
+                { "Title": "зачёт", "Color": "#2E9E44" }
+            ],
+            "Tasks": [
+                { "Title": "Выбрать тему реферата", "IsCompleted": false },
+                { "Title": "Прочитать главы 3–4 учебника", "IsCompleted": false }
+            ]
+        },
+        {
+            "Name": "Английский язык",
+            "Teacher": "Smith J.",
+            "Description": "Грамматика и разговорная практика",
+            "Icon": "",
+            "Color": "#3068DF",
+            "Tags": [
+                { "Title": "зачёт", "Color": "#2E9E44" }
+            ],
+            "Tasks": [
+                { "Title": "Выучить слова к Unit 6", "IsCompleted": false },
+                { "Title": "Написать эссе на 250 слов", "IsCompleted": false }
+            ],
+            "Notes": [
+                {
+                    "Title": "Present Perfect",
+                    "Content": "have/has + V3\nОпыт и результат к настоящему моменту: I have already done my homework.\nМаркеры: already, yet, just, ever, never, since, for."
+                }
+            ]
+        },
+        {
+            "Name": "Программирование",
+            "Teacher": "Сидоров П. В.",
+            "Description": "C# и алгоритмы",
+            "Icon": "",
+            "Color": "#0F8B7E",
+            "Tags": [
+                { "Title": "экзамен", "Color": "#E0245E" },
+                { "Title": "курсовая", "Color": "#8E44AD" }
+            ],
+            "Tasks": [
+                { "Title": "Сдать лабораторную №3", "IsCompleted": false },
+                { "Title": "Начать курсовой проект", "IsCompleted": false }
+            ]
+        }
+    ]
+}

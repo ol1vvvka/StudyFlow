@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:sf="clr-namespace:Syncfusion.Maui.Toolkit.TextInputLayout;assembly=Syncfusion.Maui.Toolkit"
+             xmlns:pageModel="clr-namespace:StudyFlow.PageModels"
+             xmlns:models="clr-namespace:StudyFlow.Models"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             x:DataType="pageModel:TaskDetailPageModel"
+             x:Class="StudyFlow.Pages.TaskDetailPage"
+             Title="{x:Static strings:AppResources.TaskTitle}">
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem
+            Text="{x:Static strings:AppResources.Delete}"
+            Command="{Binding DeleteCommand}"
+            Order="Primary"
+            Priority="0"
+            IconImageSource="{StaticResource IconDelete}"
+            SemanticProperties.Description="{x:Static strings:AppResources.DeleteTask}" />
+    </ContentPage.ToolbarItems>
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Spacing="{StaticResource LayoutSpacing}" Padding="{StaticResource LayoutPadding}">
+                <sf:SfTextInputLayout Hint="{x:Static strings:AppResources.TaskName}">
+                    <Entry
+                        Text="{Binding Title}"
+                        SemanticProperties.Description="{x:Static strings:AppResources.TaskName}" />
+                </sf:SfTextInputLayout>
+
+                <sf:SfTextInputLayout Hint="{x:Static strings:AppResources.TaskCompleted}">
+                    <CheckBox
+                        HorizontalOptions="End"
+                        IsChecked="{Binding IsCompleted}"
+                        SemanticProperties.Description="{x:Static strings:AppResources.TaskCompleted}" />
+                </sf:SfTextInputLayout>
+
+                 <sf:SfTextInputLayout
+                    IsVisible="{Binding IsExistingSubject}"
+                    Hint="{x:Static strings:AppResources.TaskSubject}">
+                    <Picker
+                        ItemsSource="{Binding Subjects}"
+                        ItemDisplayBinding="{Binding Name, x:DataType=models:Subject}"
+                        SelectedItem="{Binding Subject}"
+                        SelectedIndex="{Binding SelectedSubjectIndex}"
+                        SemanticProperties.Description="{x:Static strings:AppResources.TaskSubject}"/>
+                </sf:SfTextInputLayout>
+
+                <Button
+                    MinimumHeightRequest="{OnIdiom 44, Desktop=60}"
+                    Text="{x:Static strings:AppResources.Save}"
+                    Command="{Binding SaveCommand}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</ContentPage>

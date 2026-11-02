@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Border xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+        xmlns:models="clr-namespace:StudyFlow.Models"
+        xmlns:pageModels="clr-namespace:StudyFlow.PageModels"
+        xmlns:fonts="clr-namespace:Fonts"
+        x:Class="StudyFlow.Pages.Controls.NoteView"
+        x:DataType="models:Note"
+        Style="{StaticResource CardStyle}"
+        Padding="{OnIdiom '14,10', Desktop='18,12'}"
+        SemanticProperties.Description="{Binding AccessibilityDescription}">
+
+    <Border.GestureRecognizers>
+        <TapGestureRecognizer
+            Command="{Binding OpenNoteCommand, Source={RelativeSource AncestorType={x:Type pageModels:INotePageModel}}, x:DataType=pageModels:INotePageModel}"
+            CommandParameter="{Binding .}" />
+    </Border.GestureRecognizers>
+
+    <VerticalStackLayout Spacing="4">
+        <!-- Visibility is set in code-behind: it depends on both ShowSubject and the note -->
+        <Label
+            x:Name="SubjectLabel"
+            Text="{Binding SubjectName}"
+            Style="{StaticResource Caption1Strong}"
+            TextColor="{Binding SubjectDisplayColor}"
+            MaxLines="1"
+            LineBreakMode="TailTruncation" />
+        <Label
+            Text="{Binding DisplayTitle}"
+            Style="{StaticResource Body1Strong}"
+            MaxLines="1"
+            LineBreakMode="TailTruncation" />
+        <Label
+            Text="{Binding Preview}"
+            IsVisible="{Binding HasPreview}"
+            Style="{StaticResource Body2}"
+            TextColor="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray300}}"
+            MaxLines="2"
+            LineBreakMode="TailTruncation" />
+        <HorizontalStackLayout Spacing="4">
+            <Label
+                Text="{Binding SyncGlyph}"
+                IsVisible="{Binding ShowSync}"
+                FontFamily="{x:Static fonts:FluentUI.FontFamily}"
+                FontSize="14"
+                TextColor="{Binding SyncColor}"
+                VerticalOptions="Center"
+                ToolTipProperties.Text="{Binding SyncError}" />
+            <Label
+                Text="{Binding Details}"
+                Style="{StaticResource Caption1}"
+                TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+        </HorizontalStackLayout>
+    </VerticalStackLayout>
+</Border>
