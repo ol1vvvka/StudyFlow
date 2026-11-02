@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <data name="Calendar" xml:space="preserve"><value>Календарь</value></data>
+  <data name="Year" xml:space="preserve"><value>Год</value></data>
+  <data name="Month" xml:space="preserve"><value>Месяц</value></data>
+  <data name="Week" xml:space="preserve"><value>Неделя</value></data>
+  <data name="Day" xml:space="preserve"><value>День</value></data>
+  <data name="Today" xml:space="preserve"><value>Сегодня</value></data>
+  <data name="Add" xml:space="preserve"><value>Добавить</value></data>
+  <data name="Previous" xml:space="preserve"><value>Предыдущий период</value></data>
+  <data name="Next" xml:space="preserve"><value>Следующий период</value></data>
+  <data name="Event" xml:space="preserve"><value>Событие</value></data>
+  <data name="Activity" xml:space="preserve"><value>Мероприятие</value></data>
+  <data name="Task" xml:space="preserve"><value>Задача</value></data>
+  <data name="Meeting" xml:space="preserve"><value>Встреча</value></data>
+  <data name="NewEntry" xml:space="preserve"><value>Новая запись</value></data>
+  <data name="EditEntry" xml:space="preserve"><value>Изменить запись</value></data>
+  <data name="Title" xml:space="preserve"><value>Название</value></data>
+  <data name="Kind" xml:space="preserve"><value>Тип записи</value></data>
+  <data name="AllDay" xml:space="preserve"><value>Весь день</value></data>
+  <data name="Start" xml:space="preserve"><value>Начало</value></data>
+  <data name="End" xml:space="preserve"><value>Окончание</value></data>
+  <data name="Location" xml:space="preserve"><value>Место или ссылка на встречу</value></data>
+  <data name="Description" xml:space="preserve"><value>Описание</value></data>
+  <data name="Subject" xml:space="preserve"><value>Предмет</value></data>
+  <data name="NoSubject" xml:space="preserve"><value>Без предмета</value></data>
+  <data name="Completed" xml:space="preserve"><value>Задача выполнена</value></data>
+  <data name="Empty" xml:space="preserve"><value>На этот день пока ничего не запланировано.</value></data>
+  <data name="TitleRequired" xml:space="preserve"><value>Введите название записи.</value></data>
+  <data name="EndAfterStart" xml:space="preserve"><value>Окончание должно быть позже начала. Для ночной встречи выберите следующий день.</value></data>
+  <data name="DateRange" xml:space="preserve"><value>Выберите дату между 1900 и 2100 годами.</value></data>
+  <data name="InvalidKind" xml:space="preserve"><value>Выберите тип записи.</value></data>
+  <data name="InvalidAllDay" xml:space="preserve"><value>У записи на весь день должны быть указаны целые дни.</value></data>
+  <data name="DeleteConfirm" xml:space="preserve"><value>Удалить запись «{0}»?</value></data>
+  <data name="OpenDay" xml:space="preserve"><value>Открыть день</value></data>
+  <data name="LocalTime" xml:space="preserve"><value>Время местное · записи хранятся на устройстве</value></data>
+  <data name="Count" xml:space="preserve"><value>Записей: {0}</value></data>
+  <data name="NewAt" xml:space="preserve"><value>Добавить запись на {0:dd.MM HH:mm}</value></data>
+  <data name="Reload" xml:space="preserve"><value>Обновить</value></data>
+</root>

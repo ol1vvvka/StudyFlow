@@ -1,4 +1,4 @@
-using CommunityToolkit.Maui;
+﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Syncfusion.Maui.Toolkit.Hosting;
 
@@ -41,6 +41,8 @@ namespace StudyFlow
             builder.Services.AddSingleton<TagRepository>();
             builder.Services.AddSingleton<MaterialRepository>();
             builder.Services.AddSingleton<NoteRepository>();
+            builder.Services.AddSingleton<CalendarRepository>();
+            builder.Services.AddTransient<CalendarPage>();
             builder.Services.AddSingleton<SeedDataService>();
             builder.Services.AddSingleton<MaterialService>();
             // No overall timeout: video uploads can take long. Short API calls set their own.

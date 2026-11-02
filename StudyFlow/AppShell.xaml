@@ -32,6 +32,12 @@
             Route="subjects" />
 
         <ShellContent
+            Title="{x:Static strings:CalendarText.Title}"
+            Icon="{StaticResource IconCalendar}"
+            ContentTemplate="{DataTemplate pages:CalendarPage}"
+            Route="calendar" />
+
+        <ShellContent
             Title="{x:Static strings:AppResources.NavNotes}"
             Icon="{StaticResource IconNotes}"
             ContentTemplate="{DataTemplate pages:NoteListPage}"
