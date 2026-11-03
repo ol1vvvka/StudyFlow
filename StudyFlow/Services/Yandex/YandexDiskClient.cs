@@ -90,6 +90,29 @@ namespace StudyFlow.Services.Yandex
         }
 
         /// <summary>
+        /// Downloads a file from the app folder on Disk into <paramref name="targetPath"/>.
+        /// </summary>
+        public async Task DownloadAsync(string path, string targetPath, CancellationToken cancellationToken = default)
+        {
+            string href;
+            using (var response = await SendAsync(HttpMethod.Get, $"resources/download?path={Uri.EscapeDataString(path)}", cancellationToken))
+            {
+                using var json = JsonDocument.Parse(await response.Content.ReadAsStringAsync(cancellationToken));
+                href = json.RootElement.GetProperty("href").GetString()
+                    ?? throw new YandexDiskException(HttpStatusCode.BadGateway, "No download URL");
+            }
+
+            using var download = await _http.GetAsync(href, HttpCompletionOption.ResponseHeadersRead, cancellationToken);
+            if (!download.IsSuccessStatusCode)
+                throw YandexDiskException.FromStatus(download.StatusCode, await download.Content.ReadAsStringAsync(cancellationToken));
+
+            Directory.CreateDirectory(Path.GetDirectoryName(targetPath)!);
+            await using var source = await download.Content.ReadAsStreamAsync(cancellationToken);
+            await using var target = File.Create(targetPath);
+            await source.CopyToAsync(target, cancellationToken);
+        }
+
+        /// <summary>
         /// Moves or renames a file or folder. Never replaces an existing file at <paramref name="to"/>.
         /// </summary>
         /// <returns>False if there was nothing at <paramref name="from"/>.</returns>

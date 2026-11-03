@@ -9,12 +9,19 @@ namespace StudyFlow.Pages
             InitializeComponent();
             BindingContext = _model = model;
             ThemeSegmentedControl.SelectedIndex = model.ThemeIndex;
+            StorageModeSegmentedControl.SelectedIndex = model.StorageModeIndex;
         }
 
         private void ThemeSegmentedControl_SelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
         {
             if (e.NewIndex is int index)
                 _model.SetTheme(index);
+        }
+
+        private void StorageModeSegmentedControl_SelectionChanged(object? sender, Syncfusion.Maui.Toolkit.SegmentedControl.SelectionChangedEventArgs e)
+        {
+            if (e.NewIndex is int index)
+                _model.SetStorageMode(index);
         }
     }
 }

@@ -14,11 +14,15 @@ namespace StudyFlow.Models
     }
 
     /// <summary>
-    /// A file or a link attached to a subject.
+    /// A file or a link. <see cref="SubjectID"/> is 0 when the material is not in a space.
     /// </summary>
     public class Material
     {
         public int ID { get; set; }
+
+        /// <summary>
+        /// Owning space ID, or 0 for materials added outside any space.
+        /// </summary>
         public int SubjectID { get; set; }
         public string Title { get; set; } = string.Empty;
         public MaterialKind Kind { get; set; }
@@ -67,11 +71,18 @@ namespace StudyFlow.Models
         public bool IsLink => Kind == MaterialKind.Link;
         public bool IsImage => Kind == MaterialKind.Image;
 
-        public string FullPath => IsLink ? string.Empty : Path.Combine(Constants.MaterialsDirectory, FilePath);
+        public bool HasSubject => SubjectID > 0 && SubjectName.Length > 0;
 
-        public ImageSource? Thumbnail => IsImage ? ImageSource.FromFile(FullPath) : null;
+        public bool HasLocalFile => !IsLink && FilePath.Length > 0 && File.Exists(FullPath);
 
-        public Color SubjectDisplayColor => Microsoft.Maui.Graphics.Color.FromArgb(SubjectColor);
+        public string FullPath => IsLink || FilePath.Length == 0
+            ? string.Empty
+            : Path.Combine(Constants.MaterialsDirectory, FilePath);
+
+        public ImageSource? Thumbnail => IsImage && HasLocalFile ? ImageSource.FromFile(FullPath) : null;
+
+        public Color SubjectDisplayColor => Microsoft.Maui.Graphics.Color.FromArgb(
+            HasSubject ? SubjectColor : SubjectPalette.DefaultColor);
 
         public string KindGlyph => Kind switch
         {

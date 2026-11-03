@@ -148,7 +148,7 @@ namespace StudyFlow.Resources.Strings {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to StudyFlow, версия {0}.
+        ///   Looks up a localized string similar to StudyFlow, версия {0} ({1}).
         /// </summary>
         public static string AppVersionFormat {
             get {
@@ -1558,6 +1558,54 @@ namespace StudyFlow.Resources.Strings {
             get {
                 return ResourceManager.GetString("YandexWaitingForBrowser", resourceCulture);
             }
+        }
+        
+        public static string ClearDemo {
+            get { return ResourceManager.GetString("ClearDemo", resourceCulture); }
+        }
+        
+        public static string ClearDemoDone {
+            get { return ResourceManager.GetString("ClearDemoDone", resourceCulture); }
+        }
+        
+        public static string ClearDemoMessage {
+            get { return ResourceManager.GetString("ClearDemoMessage", resourceCulture); }
+        }
+        
+        public static string ClearDemoOnSignInMessage {
+            get { return ResourceManager.GetString("ClearDemoOnSignInMessage", resourceCulture); }
+        }
+        
+        public static string ClearDemoOnSignInTitle {
+            get { return ResourceManager.GetString("ClearDemoOnSignInTitle", resourceCulture); }
+        }
+        
+        public static string ClearDemoTitle {
+            get { return ResourceManager.GetString("ClearDemoTitle", resourceCulture); }
+        }
+        
+        public static string CloudStorageCloudOnly {
+            get { return ResourceManager.GetString("CloudStorageCloudOnly", resourceCulture); }
+        }
+        
+        public static string CloudStorageDeviceAndCloud {
+            get { return ResourceManager.GetString("CloudStorageDeviceAndCloud", resourceCulture); }
+        }
+        
+        public static string CloudStorageModeHeader {
+            get { return ResourceManager.GetString("CloudStorageModeHeader", resourceCulture); }
+        }
+        
+        public static string CloudStorageModeHint {
+            get { return ResourceManager.GetString("CloudStorageModeHint", resourceCulture); }
+        }
+        
+        public static string KeepDemo {
+            get { return ResourceManager.GetString("KeepDemo", resourceCulture); }
+        }
+        
+        public static string MaterialCloudOffline {
+            get { return ResourceManager.GetString("MaterialCloudOffline", resourceCulture); }
         }
     }
 }

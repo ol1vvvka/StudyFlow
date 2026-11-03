@@ -83,5 +83,17 @@ namespace StudyFlow.Data
 
             return await deleteCmd.ExecuteNonQueryAsync();
         }
+
+        public async Task DropTableAsync()
+        {
+            await Init();
+            await using var connection = new SqliteConnection(Constants.DatabasePath);
+            await connection.OpenAsync();
+
+            var dropCmd = connection.CreateCommand();
+            dropCmd.CommandText = "DROP TABLE IF EXISTS RemoteDeletion";
+            await dropCmd.ExecuteNonQueryAsync();
+            _hasBeenInitialized = false;
+        }
     }
 }

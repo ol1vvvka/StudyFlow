@@ -61,7 +61,7 @@
 
   <!-- Navigation -->
   <data name="NavHome" xml:space="preserve"><value>Главная</value></data>
-  <data name="NavSubjects" xml:space="preserve"><value>Предметы</value></data>
+  <data name="NavSubjects" xml:space="preserve"><value>Пространства</value></data>
   <data name="NavNotes" xml:space="preserve"><value>Заметки</value></data>
   <data name="NavMaterials" xml:space="preserve"><value>Материалы</value></data>
   <data name="NavSettings" xml:space="preserve"><value>Настройки</value></data>
@@ -86,6 +86,10 @@
   <data name="YandexBrowserDone" xml:space="preserve"><value>Вход выполнен. Можно вернуться в StudyFlow.</value></data>
   <data name="CloudSyncNow" xml:space="preserve"><value>Синхронизировать</value></data>
   <data name="CloudWifiOnly" xml:space="preserve"><value>Отправлять файлы только по Wi-Fi</value></data>
+  <data name="CloudStorageModeHeader" xml:space="preserve"><value>Где хранить файлы</value></data>
+  <data name="CloudStorageModeHint" xml:space="preserve"><value>«Только Диск» удаляет копию файла с устройства после успешной отправки. Заметки и записи календаря остаются в приложении.</value></data>
+  <data name="CloudStorageDeviceAndCloud" xml:space="preserve"><value>Устройство и Диск</value></data>
+  <data name="CloudStorageCloudOnly" xml:space="preserve"><value>Только Диск</value></data>
   <data name="CloudSyncProgress" xml:space="preserve"><value>Отправка на Диск: {0} из {1}</value></data>
   <data name="CloudSyncUpToDate" xml:space="preserve"><value>Последняя синхронизация: {0:g}</value></data>
   <data name="CloudSyncNever" xml:space="preserve"><value>Синхронизация ещё не запускалась.</value></data>
@@ -97,8 +101,8 @@
   <data name="CloudDiskError" xml:space="preserve"><value>Ошибка Яндекс Диска: {0}</value></data>
   <data name="CloudFileMissing" xml:space="preserve"><value>Файл не найден на устройстве.</value></data>
   <data name="DemoHeader" xml:space="preserve"><value>Демо-данные</value></data>
-  <data name="DemoDescription" xml:space="preserve"><value>Вернуть примеры предметов, заметок и задач. Всё, что вы добавили, будет удалено.</value></data>
-  <data name="AppVersionFormat" xml:space="preserve"><value>StudyFlow, версия {0}</value></data>
+  <data name="DemoDescription" xml:space="preserve"><value>Удалить примеры или заново загрузить демонстрационные пространства, заметки и задачи.</value></data>
+  <data name="AppVersionFormat" xml:space="preserve"><value>StudyFlow, версия {0} ({1})</value></data>
 
   <!-- Common -->
   <data name="Save" xml:space="preserve"><value>Сохранить</value></data>
@@ -114,31 +118,31 @@
   <data name="CleanedUp" xml:space="preserve"><value>Выполненные задачи убраны</value></data>
 
   <!-- Main page -->
-  <data name="MainSubjectsHeader" xml:space="preserve"><value>Мои предметы</value></data>
-  <data name="MainNoSubjects" xml:space="preserve"><value>Пока нет ни одного предмета. Добавьте первый в разделе «Предметы».</value></data>
+  <data name="MainSubjectsHeader" xml:space="preserve"><value>Мои пространства</value></data>
+  <data name="MainNoSubjects" xml:space="preserve"><value>Пока нет ни одного пространства. Добавьте первое в разделе «Пространства».</value></data>
   <data name="MainRecentMaterials" xml:space="preserve"><value>Недавние материалы</value></data>
   <data name="MainNoMaterials" xml:space="preserve"><value>Здесь появятся последние добавленные материалы.</value></data>
   <data name="MainTasksHeader" xml:space="preserve"><value>Задачи</value></data>
   <data name="AddTask" xml:space="preserve"><value>Добавить задачу</value></data>
 
   <!-- Subjects -->
-  <data name="SubjectsEmpty" xml:space="preserve"><value>Добавьте первый предмет кнопкой «+».</value></data>
-  <data name="AddSubject" xml:space="preserve"><value>Добавить предмет</value></data>
-  <data name="SubjectTitle" xml:space="preserve"><value>Предмет</value></data>
+  <data name="SubjectsEmpty" xml:space="preserve"><value>Добавьте первое пространство кнопкой «+».</value></data>
+  <data name="AddSubject" xml:space="preserve"><value>Добавить пространство</value></data>
+  <data name="SubjectTitle" xml:space="preserve"><value>Пространство</value></data>
   <data name="SubjectName" xml:space="preserve"><value>Название</value></data>
-  <data name="SubjectTeacher" xml:space="preserve"><value>Преподаватель</value></data>
+  <data name="SubjectTeacher" xml:space="preserve"><value>Преподаватель или контакт</value></data>
   <data name="SubjectDescription" xml:space="preserve"><value>Описание</value></data>
   <data name="SubjectIcon" xml:space="preserve"><value>Иконка</value></data>
   <data name="SubjectColor" xml:space="preserve"><value>Цвет</value></data>
   <data name="Tags" xml:space="preserve"><value>Теги</value></data>
   <data name="SubjectStats" xml:space="preserve"><value>Материалов: {0} · Заметок: {1} · Задач: {2}</value></data>
-  <data name="SubjectSaved" xml:space="preserve"><value>Предмет сохранён</value></data>
-  <data name="SubjectCreated" xml:space="preserve"><value>Предмет создан, теперь можно добавлять материалы и заметки</value></data>
-  <data name="SubjectDeleted" xml:space="preserve"><value>Предмет удалён</value></data>
-  <data name="SubjectNotFound" xml:space="preserve"><value>Предмет с id {0} не найден.</value></data>
-  <data name="SubjectNotLoaded" xml:space="preserve"><value>Предмет не загружен.</value></data>
-  <data name="SubjectNameRequired" xml:space="preserve"><value>Введите название предмета.</value></data>
-  <data name="DeleteSubjectTitle" xml:space="preserve"><value>Удалить предмет?</value></data>
+  <data name="SubjectSaved" xml:space="preserve"><value>Пространство сохранено</value></data>
+  <data name="SubjectCreated" xml:space="preserve"><value>Пространство создано, теперь можно добавлять материалы и заметки</value></data>
+  <data name="SubjectDeleted" xml:space="preserve"><value>Пространство удалено</value></data>
+  <data name="SubjectNotFound" xml:space="preserve"><value>Пространство с id {0} не найдено.</value></data>
+  <data name="SubjectNotLoaded" xml:space="preserve"><value>Пространство не загружено.</value></data>
+  <data name="SubjectNameRequired" xml:space="preserve"><value>Введите название пространства.</value></data>
+  <data name="DeleteSubjectTitle" xml:space="preserve"><value>Удалить пространство?</value></data>
   <data name="DeleteSubjectMessage" xml:space="preserve"><value>«{0}» будет удалён вместе со всеми материалами, заметками и задачами.</value></data>
 
   <!-- Subject icons -->
@@ -185,12 +189,13 @@
   <data name="DeleteMaterialMessage" xml:space="preserve"><value>«{0}» будет удалён с устройства.</value></data>
   <data name="MaterialsAdded" xml:space="preserve"><value>Добавлено материалов: {0}</value></data>
   <data name="MaterialsEmpty" xml:space="preserve"><value>Материалов пока нет. Добавьте PDF, документ, фото, видео или ссылку.</value></data>
-  <data name="MaterialsSaveSubjectFirst" xml:space="preserve"><value>Сохраните предмет, чтобы добавлять материалы и заметки.</value></data>
+  <data name="MaterialsSaveSubjectFirst" xml:space="preserve"><value>Сохраните пространство, чтобы добавлять материалы и заметки.</value></data>
   <data name="MaterialFileMissing" xml:space="preserve"><value>Файл «{0}» не найден на устройстве.</value></data>
+  <data name="MaterialCloudOffline" xml:space="preserve"><value>Файл хранится на Яндекс Диске. Подключитесь к сети, чтобы открыть его.</value></data>
   <data name="MaterialActions" xml:space="preserve"><value>Действия с материалом</value></data>
-  <data name="MaterialsSearch" xml:space="preserve"><value>Поиск по названию или предмету</value></data>
+  <data name="MaterialsSearch" xml:space="preserve"><value>Поиск по названию или пространству</value></data>
   <data name="MaterialsNotFound" xml:space="preserve"><value>Ничего не найдено.</value></data>
-  <data name="MaterialsAllEmpty" xml:space="preserve"><value>Материалов пока нет. Откройте предмет и нажмите «Добавить материал».</value></data>
+  <data name="MaterialsAllEmpty" xml:space="preserve"><value>Материалов пока нет. Нажмите «+», чтобы добавить файл, фото или ссылку — в пространство или без него.</value></data>
 
   <!-- Notes -->
   <data name="NotesHeader" xml:space="preserve"><value>Заметки</value></data>
@@ -199,8 +204,8 @@
   <data name="NoteTitlePlaceholder" xml:space="preserve"><value>Заголовок</value></data>
   <data name="NoteContentPlaceholder" xml:space="preserve"><value>Начните писать…</value></data>
   <data name="NoteUntitled" xml:space="preserve"><value>Без названия</value></data>
-  <data name="NoteSubject" xml:space="preserve"><value>Предмет</value></data>
-  <data name="NoSubject" xml:space="preserve"><value>Без предмета</value></data>
+  <data name="NoteSubject" xml:space="preserve"><value>Пространство</value></data>
+  <data name="NoSubject" xml:space="preserve"><value>Без пространства</value></data>
   <data name="NoteSavedAt" xml:space="preserve"><value>Сохранено в {0:HH:mm}</value></data>
   <data name="NoteDeleted" xml:space="preserve"><value>Заметка удалена</value></data>
   <data name="NoteNotFound" xml:space="preserve"><value>Заметка с id {0} не найдена.</value></data>
@@ -232,12 +237,12 @@
   <data name="TaskTitle" xml:space="preserve"><value>Задача</value></data>
   <data name="TaskName" xml:space="preserve"><value>Что нужно сделать</value></data>
   <data name="TaskCompleted" xml:space="preserve"><value>Выполнено</value></data>
-  <data name="TaskSubject" xml:space="preserve"><value>Предмет</value></data>
+  <data name="TaskSubject" xml:space="preserve"><value>Пространство</value></data>
   <data name="TaskSaved" xml:space="preserve"><value>Задача сохранена</value></data>
   <data name="TaskDeleted" xml:space="preserve"><value>Задача удалена</value></data>
   <data name="TaskNotFound" xml:space="preserve"><value>Задача с id {0} не найдена.</value></data>
   <data name="TaskNotLoaded" xml:space="preserve"><value>Задача не загружена.</value></data>
-  <data name="TaskSubjectRequired" xml:space="preserve"><value>Выберите предмет для задачи.</value></data>
+  <data name="TaskSubjectRequired" xml:space="preserve"><value>Выберите пространство для задачи.</value></data>
   <data name="DeleteTask" xml:space="preserve"><value>Удалить задачу</value></data>
 
   <!-- Tags -->
@@ -248,7 +253,14 @@
   <data name="TagAdded" xml:space="preserve"><value>Тег добавлен</value></data>
   <data name="TagDeleted" xml:space="preserve"><value>Тег удалён</value></data>
   <data name="DeleteTagFormat" xml:space="preserve"><value>Удалить тег {0}</value></data>
-  <data name="ResetDemo" xml:space="preserve"><value>Сбросить демо-данные</value></data>
-  <data name="ResetDemoTitle" xml:space="preserve"><value>Сбросить данные?</value></data>
-  <data name="ResetDemoMessage" xml:space="preserve"><value>Все предметы, задачи и материалы будут удалены и заменены демонстрационными.</value></data>
+  <data name="ResetDemo" xml:space="preserve"><value>Загрузить демо</value></data>
+  <data name="ResetDemoTitle" xml:space="preserve"><value>Загрузить демо-данные?</value></data>
+  <data name="ResetDemoMessage" xml:space="preserve"><value>Все пространства, задачи и материалы будут удалены и заменены демонстрационными.</value></data>
+  <data name="ClearDemo" xml:space="preserve"><value>Удалить демо</value></data>
+  <data name="ClearDemoTitle" xml:space="preserve"><value>Удалить все данные?</value></data>
+  <data name="ClearDemoMessage" xml:space="preserve"><value>Все пространства, заметки, задачи, материалы и записи календаря будут удалены с этого устройства. Файлы, уже отправленные на Яндекс Диск, останутся там.</value></data>
+  <data name="ClearDemoDone" xml:space="preserve"><value>Данные удалены</value></data>
+  <data name="ClearDemoOnSignInTitle" xml:space="preserve"><value>Удалить демо-данные?</value></data>
+  <data name="ClearDemoOnSignInMessage" xml:space="preserve"><value>Сейчас в приложении лежат демонстрационные примеры. Удалить их перед синхронизацией с Яндекс Диском?</value></data>
+  <data name="KeepDemo" xml:space="preserve"><value>Оставить</value></data>
 </root>

@@ -69,6 +69,25 @@ namespace StudyFlow.PageModels
         }
 
         [RelayCommand]
+        private async Task AddMaterial()
+        {
+            try
+            {
+                // subjectId 0 — material outside any space.
+                int count = await _materialService.AddWithPromptAsync(0);
+                if (count > 0)
+                {
+                    await LoadData();
+                    await AppShell.DisplayToastAsync(string.Format(AppResources.MaterialsAdded, count));
+                }
+            }
+            catch (Exception e)
+            {
+                _errorHandler.HandleError(e);
+            }
+        }
+
+        [RelayCommand]
         private async Task OpenMaterial(Material material)
         {
             try

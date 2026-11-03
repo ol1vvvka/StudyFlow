@@ -11,9 +11,11 @@ namespace StudyFlow.PageModels
         // Order of the theme segments on the settings page
         private static readonly AppTheme[] Themes = [AppTheme.Unspecified, AppTheme.Light, AppTheme.Dark];
 
+        // Order of the storage-mode segments when signed in
+        private static readonly CloudStorageMode[] StorageModes = [CloudStorageMode.DeviceAndCloud, CloudStorageMode.CloudOnly];
+
         private readonly TagRepository _tagRepository;
         private readonly SeedDataService _seedDataService;
-        private readonly MaterialService _materialService;
         private readonly YandexAuthService _yandexAuth;
         private readonly YandexDiskClient _yandexDisk;
         private readonly CloudBackupService _cloudBackup;
@@ -48,12 +50,11 @@ namespace StudyFlow.PageModels
         [ObservableProperty]
         private bool _wifiOnly;
 
-        public SettingsPageModel(TagRepository tagRepository, SeedDataService seedDataService, MaterialService materialService,
+        public SettingsPageModel(TagRepository tagRepository, SeedDataService seedDataService,
             YandexAuthService yandexAuth, YandexDiskClient yandexDisk, CloudBackupService cloudBackup, ModalErrorHandler errorHandler)
         {
             _tagRepository = tagRepository;
             _seedDataService = seedDataService;
-            _materialService = materialService;
             _yandexAuth = yandexAuth;
             _yandexDisk = yandexDisk;
             _cloudBackup = cloudBackup;
@@ -94,13 +95,30 @@ namespace StudyFlow.PageModels
 
         public int ThemeIndex => Math.Max(0, Array.IndexOf(Themes, Application.Current!.UserAppTheme));
 
-        public string Version => string.Format(AppResources.AppVersionFormat, AppInfo.Current.VersionString);
+        public int StorageModeIndex => Math.Max(0, Array.IndexOf(StorageModes, _cloudBackup.StorageMode));
+
+        public string Version => string.Format(AppResources.AppVersionFormat,
+            AppInfo.Current.VersionString, AppInfo.Current.BuildString);
 
         public void SetTheme(int index)
         {
             var theme = Themes[index];
             Application.Current!.UserAppTheme = theme;
             Preferences.Default.Set(App.ThemePreferenceKey, (int)theme);
+#if ANDROID
+            if (Platform.CurrentActivity is MainActivity activity)
+                activity.UpdateSplashTheme(theme);
+#endif
+        }
+
+        public void SetStorageMode(int index)
+        {
+            if (index < 0 || index >= StorageModes.Length)
+                return;
+
+            _cloudBackup.StorageMode = StorageModes[index];
+            if (StorageModes[index] == CloudStorageMode.CloudOnly)
+                _cloudBackup.RequestSync();
         }
 
         private async Task LoadData()
@@ -156,6 +174,15 @@ namespace StudyFlow.PageModels
                 ShowUser(user);
                 await AppShell.DisplayToastAsync(string.Format(AppResources.YandexSignedIn, user.Name));
                 await LoadDiskUsage();
+
+                if (SeedDataService.IsDemoActive)
+                {
+                    bool clearDemo = await Shell.Current.DisplayAlertAsync(
+                        AppResources.ClearDemoOnSignInTitle, AppResources.ClearDemoOnSignInMessage,
+                        AppResources.ClearDemo, AppResources.KeepDemo);
+                    if (clearDemo)
+                        await _seedDataService.ClearAllDataAsync();
+                }
 
                 // Everything created before signing in is waiting to be sent.
                 _cloudBackup.SyncNowAsync().FireAndForgetSafeAsync(_errorHandler);
@@ -242,7 +269,20 @@ namespace StudyFlow.PageModels
                 return;
 
             await _seedDataService.LoadSeedDataAsync();
-            _materialService.DeleteAllFiles();
+            await Shell.Current.GoToAsync("//main");
+        }
+
+        [RelayCommand]
+        private async Task ClearDemo()
+        {
+            bool confirmed = await Shell.Current.DisplayAlertAsync(
+                AppResources.ClearDemoTitle, AppResources.ClearDemoMessage,
+                AppResources.ClearDemo, AppResources.Cancel);
+            if (!confirmed)
+                return;
+
+            await _seedDataService.ClearAllDataAsync();
+            await AppShell.DisplayToastAsync(AppResources.ClearDemoDone);
             await Shell.Current.GoToAsync("//main");
         }
     }
