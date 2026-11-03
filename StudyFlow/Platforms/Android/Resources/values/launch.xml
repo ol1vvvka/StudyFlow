@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="studyflow_launch_background">#F6F7ED</color>
+    <bool name="studyflow_launch_light_status">true</bool>
+    <style name="StudyFlow.SplashTheme" parent="Maui.SplashTheme">
+        <item name="android:windowBackground">@color/studyflow_launch_background</item>
+        <item name="android:windowSplashScreenBackground">@color/studyflow_launch_background</item>
+        <item name="android:statusBarColor">@color/studyflow_launch_background</item>
+        <item name="android:windowLightStatusBar">@bool/studyflow_launch_light_status</item>
+    </style>
+    <style name="StudyFlow.SplashTheme.Light" parent="StudyFlow.SplashTheme">
+        <item name="android:windowBackground">#F6F7ED</item>
+        <item name="android:windowSplashScreenBackground">#F6F7ED</item>
+        <item name="android:statusBarColor">#F6F7ED</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+    <style name="StudyFlow.SplashTheme.Dark" parent="StudyFlow.SplashTheme">
+        <item name="android:windowBackground">#001F3F</item>
+        <item name="android:windowSplashScreenBackground">#001F3F</item>
+        <item name="android:statusBarColor">#001F3F</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+</resources>

@@ -7,7 +7,9 @@
     xmlns:models="clr-namespace:StudyFlow.Models"
     xmlns:shimmer="clr-namespace:Syncfusion.Maui.Toolkit.Shimmer;assembly=Syncfusion.Maui.Toolkit"
     x:Class="StudyFlow.Pages.Controls.TaskView"
-    StrokeShape="RoundRectangle 20"
+    StrokeShape="RoundRectangle 16"
+    StrokeThickness="1"
+    Stroke="{AppThemeBinding Light={StaticResource BorderLight}, Dark={StaticResource BorderDark}}"
     Background="{AppThemeBinding Light={StaticResource LightSecondaryBackground}, Dark={StaticResource DarkSecondaryBackground}}"
     x:DataType="models:StudyTask">
     

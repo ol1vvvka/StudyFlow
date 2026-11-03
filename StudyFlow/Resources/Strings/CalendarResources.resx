@@ -24,8 +24,8 @@
   <data name="End" xml:space="preserve"><value>Окончание</value></data>
   <data name="Location" xml:space="preserve"><value>Место или ссылка на встречу</value></data>
   <data name="Description" xml:space="preserve"><value>Описание</value></data>
-  <data name="Subject" xml:space="preserve"><value>Предмет</value></data>
-  <data name="NoSubject" xml:space="preserve"><value>Без предмета</value></data>
+  <data name="Subject" xml:space="preserve"><value>Пространство</value></data>
+  <data name="NoSubject" xml:space="preserve"><value>Без пространства</value></data>
   <data name="Completed" xml:space="preserve"><value>Задача выполнена</value></data>
   <data name="Empty" xml:space="preserve"><value>На этот день пока ничего не запланировано.</value></data>
   <data name="TitleRequired" xml:space="preserve"><value>Введите название записи.</value></data>

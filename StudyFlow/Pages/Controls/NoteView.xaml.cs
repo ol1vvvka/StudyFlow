@@ -33,6 +33,6 @@ namespace StudyFlow.Pages.Controls
         }
 
         private void UpdateSubjectVisibility() =>
-            SubjectLabel.IsVisible = ShowSubject && BindingContext is Note { HasSubject: true };
+            SubjectRow.IsVisible = ShowSubject && BindingContext is Note { HasSubject: true };
     }
 }

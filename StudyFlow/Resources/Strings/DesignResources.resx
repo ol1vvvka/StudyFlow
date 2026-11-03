@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype"><value>text/microsoft-resx</value></resheader>
+  <resheader name="version"><value>2.0</value></resheader>
+  <data name="Headline" xml:space="preserve"><value>Всё важное — рядом.</value></data>
+  <data name="Subtitle" xml:space="preserve"><value>Заметки, материалы и планы для учёбы и работы.</value></data>
+  <data name="Calendar" xml:space="preserve"><value>Открыть календарь →</value></data>
+  <data name="SplashSubtitle" xml:space="preserve"><value>Твоё пространство для идей и дел</value></data>
+</root>
