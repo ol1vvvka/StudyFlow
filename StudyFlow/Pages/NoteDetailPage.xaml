@@ -34,24 +34,22 @@
             SemanticProperties.Description="{x:Static strings:AppResources.Done}" />
     </ContentPage.ToolbarItems>
 
-    <ScrollView>
+    <ScrollView VerticalScrollBarVisibility="Never">
         <VerticalStackLayout Padding="{StaticResource LayoutPadding}" Spacing="{StaticResource LayoutSpacing}">
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10">
+            <VerticalStackLayout Spacing="4">
                 <Picker
                     Title="{x:Static strings:AppResources.NoteSubject}"
                     ItemsSource="{Binding Subjects}"
                     ItemDisplayBinding="{Binding Name, x:DataType=models:Subject}"
                     SelectedItem="{Binding Subject}"
-                    HorizontalOptions="Start"
-                    MinimumWidthRequest="200"
+                    HorizontalOptions="Fill"
                     SemanticProperties.Description="{x:Static strings:AppResources.NoteSubject}" />
                 <Label
-                    Grid.Column="1"
                     Text="{Binding Status}"
                     Style="{StaticResource Caption1}"
                     TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}"
                     VerticalOptions="Center" />
-            </Grid>
+        </VerticalStackLayout>
 
             <Entry
                 Text="{Binding Title}"
@@ -59,13 +57,17 @@
                 FontSize="{OnIdiom 22, Desktop=26}"
                 SemanticProperties.Description="{x:Static strings:AppResources.NoteTitlePlaceholder}" />
 
+            <Border Style="{StaticResource CardStyle}" Padding="16" StrokeShape="RoundRectangle 16">
             <Editor
+                ClassId="NoteBody"
+                BackgroundColor="Transparent"
                 Text="{Binding Content}"
                 Placeholder="{x:Static strings:AppResources.NoteContentPlaceholder}"
                 AutoSize="TextChanges"
                 MinimumHeightRequest="320"
                 FontSize="17"
                 SemanticProperties.Description="{x:Static strings:AppResources.NoteContentPlaceholder}" />
+            </Border>
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

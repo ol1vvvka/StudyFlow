@@ -6,9 +6,16 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:pages="clr-namespace:StudyFlow.Pages"
     xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     FlyoutBehavior="{OnPlatform WinUI=Locked, Default=Disabled}"
     Shell.TabBarIsVisible="{OnPlatform WinUI=False, Default=True}"
     Title="StudyFlow">
+
+    <Shell.Behaviors>
+        <toolkit:StatusBarBehavior
+            StatusBarColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}"
+            StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
+    </Shell.Behaviors>
 
     <Shell.FlyoutHeader>
         <Label

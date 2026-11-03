@@ -46,10 +46,10 @@
 
             <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
                 <Label
+                    x:Name="SubjectLabel"
                     Text="{Binding SubjectName}"
                     Style="{StaticResource Caption1Strong}"
                     TextColor="{Binding SubjectDisplayColor}"
-                    IsVisible="{Binding ShowSubject, Source={x:Reference Root}, x:DataType=controls:MaterialView}"
                     MaxLines="1"
                     LineBreakMode="TailTruncation" />
                 <Label

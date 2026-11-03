@@ -33,21 +33,24 @@
         </shimmer:SfShimmer.CustomView>
         <shimmer:SfShimmer.Content>
             <VerticalStackLayout Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
                 <Border
                     WidthRequest="44"
                     HeightRequest="44"
                     Padding="0"
-                    StrokeShape="RoundRectangle 22"
-                    BackgroundColor="{Binding DisplayColor}"
+                    StrokeShape="RoundRectangle 14"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Secondary}, Dark={StaticResource SelectedBackgroundDark}}"
                     HorizontalOptions="Start">
                     <Label
                         Text="{Binding Icon}"
                         FontFamily="{x:Static fonts:FluentUI.FontFamily}"
                         FontSize="22"
-                        TextColor="White"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                         HorizontalOptions="Center"
                         VerticalOptions="Center" />
                 </Border>
+                <BoxView Grid.Column="1" Color="{Binding DisplayColor}" WidthRequest="10" HeightRequest="10" CornerRadius="5" VerticalOptions="Start" Margin="0,4,0,0" />
+                </Grid>
                 <Label Text="{Binding Name}" Style="{StaticResource Body1Strong}" FontSize="16" LineBreakMode="WordWrap"/>
                 <Label
                     Text="{Binding Teacher}"

@@ -17,14 +17,22 @@
     </Border.GestureRecognizers>
 
     <VerticalStackLayout Spacing="4">
-        <!-- Visibility is set in code-behind: it depends on both ShowSubject and the note -->
+        <Grid x:Name="SubjectRow" ColumnDefinitions="Auto,*" ColumnSpacing="8">
+        <Border
+            WidthRequest="12" HeightRequest="12" Padding="0"
+            StrokeShape="RoundRectangle 6" StrokeThickness="1.5"
+            Stroke="{AppThemeBinding Light=Black, Dark=White}"
+            BackgroundColor="{Binding SubjectDisplayColor}"
+            VerticalOptions="Center"
+            AutomationProperties.IsInAccessibleTree="False" />
         <Label
-            x:Name="SubjectLabel"
+            Grid.Column="1"
             Text="{Binding SubjectName}"
             Style="{StaticResource Caption1Strong}"
-            TextColor="{Binding SubjectDisplayColor}"
+            TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}"
             MaxLines="1"
             LineBreakMode="TailTruncation" />
+        </Grid>
         <Label
             Text="{Binding DisplayTitle}"
             Style="{StaticResource Body1Strong}"

@@ -122,6 +122,35 @@
                         VerticalOptions="Center"
                         SemanticProperties.Description="{x:Static strings:AppResources.CloudWifiOnly}" />
                 </Grid>
+
+                <Label Text="{x:Static strings:AppResources.CloudStorageModeHeader}" Style="{StaticResource Body2}" />
+                <Label Text="{x:Static strings:AppResources.CloudStorageModeHint}" Style="{StaticResource Caption1}"
+                       TextColor="{AppThemeBinding Light={StaticResource Gray500}, Dark={StaticResource Gray400}}" />
+                <sf:SfSegmentedControl
+                    x:Name="StorageModeSegmentedControl"
+                    HorizontalOptions="Start"
+                    SegmentWidth="{OnIdiom 140, Desktop=180}"
+                    SegmentHeight="40"
+                    Stroke="{AppThemeBinding Light={StaticResource Gray200Brush}, Dark={StaticResource Gray600Brush}}"
+                    SelectionChanged="StorageModeSegmentedControl_SelectionChanged">
+                    <sf:SfSegmentedControl.TextStyle>
+                        <sf:SegmentTextStyle
+                            TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}"
+                            FontFamily="NunitoSemiBold"
+                            FontSize="13" />
+                    </sf:SfSegmentedControl.TextStyle>
+                    <sf:SfSegmentedControl.SelectionIndicatorSettings>
+                        <sf:SelectionIndicatorSettings
+                            Background="{StaticResource ActionBackgroundBrush}"
+                            TextColor="{StaticResource ActionText}" />
+                    </sf:SfSegmentedControl.SelectionIndicatorSettings>
+                    <sf:SfSegmentedControl.ItemsSource>
+                        <x:Array Type="{x:Type sf:SfSegmentItem}">
+                            <sf:SfSegmentItem Text="{x:Static strings:AppResources.CloudStorageDeviceAndCloud}" />
+                            <sf:SfSegmentItem Text="{x:Static strings:AppResources.CloudStorageCloudOnly}" />
+                        </x:Array>
+                    </sf:SfSegmentedControl.ItemsSource>
+                </sf:SfSegmentedControl>
                 </VerticalStackLayout>
             </Border>
 
@@ -197,12 +226,18 @@
 
             <Label Text="{x:Static strings:AppResources.DemoHeader}" Style="{StaticResource Title2}" />
             <Label Text="{x:Static strings:AppResources.DemoDescription}" Style="{StaticResource Body2}" />
-            <Button
-                Text="{x:Static strings:AppResources.ResetDemo}"
-                Command="{Binding ResetCommand}"
-                Style="{StaticResource SecondaryButton}"
-                HorizontalOptions="Start"
-                Margin="0,5,0,20" />
+            <HorizontalStackLayout Spacing="10" Margin="0,5,0,20">
+                <Button
+                    Text="{x:Static strings:AppResources.ClearDemo}"
+                    Command="{Binding ClearDemoCommand}"
+                    Style="{StaticResource SecondaryButton}"
+                    HorizontalOptions="Start" />
+                <Button
+                    Text="{x:Static strings:AppResources.ResetDemo}"
+                    Command="{Binding ResetCommand}"
+                    Style="{StaticResource SecondaryButton}"
+                    HorizontalOptions="Start" />
+            </HorizontalStackLayout>
 
             <Label
                 Text="{Binding Version}"

@@ -22,10 +22,7 @@
     <Grid>
         <CollectionView ItemsSource="{Binding Subjects}"
             Margin="{StaticResource LayoutPadding}"
-            SelectionMode="Single"
-            SelectedItem="{Binding SelectedSubject}"
-            SelectionChangedCommand="{Binding NavigateToSubjectCommand, Source={RelativeSource AncestorType={x:Type pageModels:SubjectListPageModel}}, x:DataType=pageModels:SubjectListPageModel}"
-            SelectionChangedCommandParameter="{Binding SelectedSubject}">
+            SelectionMode="None">
             <CollectionView.EmptyView>
                 <Label Text="{x:Static strings:AppResources.SubjectsEmpty}" Style="{StaticResource Body2}" Margin="0,20" />
             </CollectionView.EmptyView>
@@ -34,9 +31,14 @@
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="models:Subject">
-                    <Border
+                    <Border Style="{StaticResource CardStyle}"
                         Background="{AppThemeBinding Light={StaticResource LightSecondaryBackground},Dark={StaticResource DarkSecondaryBackground}}"
                         SemanticProperties.Description="{Binding AccessibilityDescription}">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Command="{Binding NavigateToSubjectCommand, Source={RelativeSource AncestorType={x:Type pageModels:SubjectListPageModel}}, x:DataType=pageModels:SubjectListPageModel}"
+                                CommandParameter="{Binding .}" />
+                        </Border.GestureRecognizers>
                         <Grid ColumnDefinitions="Auto,*" ColumnSpacing="15">
                             <Border
                                 WidthRequest="48"

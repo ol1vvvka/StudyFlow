@@ -85,6 +85,14 @@ public sealed class CalendarRepository
         await command.ExecuteNonQueryAsync();
     }
 
+    public async Task ClearAllAsync()
+    {
+        await using var connection = await OpenAsync();
+        using var command = connection.CreateCommand();
+        command.CommandText = "DELETE FROM CalendarEntry";
+        await command.ExecuteNonQueryAsync();
+    }
+
     private static string Format(DateTime value) => value.ToString("yyyy-MM-dd'T'HH:mm:ss.fffffff", CultureInfo.InvariantCulture);
     private static DateTime Parse(string value) => DateTime.SpecifyKind(DateTime.Parse(value, CultureInfo.InvariantCulture), DateTimeKind.Unspecified);
 }

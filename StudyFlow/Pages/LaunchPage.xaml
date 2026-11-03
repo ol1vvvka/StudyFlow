@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:strings="clr-namespace:StudyFlow.Resources.Strings"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="StudyFlow.Pages.LaunchPage"
+             BackgroundColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}">
+    <ContentPage.Behaviors>
+        <toolkit:StatusBarBehavior StatusBarColor="{AppThemeBinding Light={StaticResource LightBackground}, Dark={StaticResource DarkBackground}}" StatusBarStyle="{AppThemeBinding Light=DarkContent, Dark=LightContent}" />
+    </ContentPage.Behaviors>
+    <Grid IsClippedToBounds="True">
+        <AbsoluteLayout InputTransparent="True">
+            <Ellipse x:Name="Halo" AbsoluteLayout.LayoutBounds="0.5,0.2,720,720" AbsoluteLayout.LayoutFlags="PositionProportional">
+                <Ellipse.Fill>
+                    <RadialGradientBrush Radius="0.5">
+                        <GradientStop Color="{AppThemeBinding Light=#5574C365, Dark=#9974C365}" Offset="0" />
+                        <GradientStop Color="{AppThemeBinding Light=#2274C365, Dark=#5500804C}" Offset="0.35" />
+                        <GradientStop Color="{AppThemeBinding Light=#00F6F7ED, Dark=#00001F3F}" Offset="1" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Ellipse x:Name="Orb" AbsoluteLayout.LayoutBounds="0.5,0.18,420,420" AbsoluteLayout.LayoutFlags="PositionProportional">
+                <Ellipse.Fill>
+                    <RadialGradientBrush Center="0.46,0.44" Radius="0.5">
+                        <GradientStop Color="#F6F7ED" Offset="0" />
+                        <GradientStop Color="#DBE64C" Offset="0.22" />
+                        <GradientStop Color="{AppThemeBinding Light=#99DBE64C, Dark=#CCDBE64C}" Offset="0.38" />
+                        <GradientStop Color="{AppThemeBinding Light=#3374C365, Dark=#5574C365}" Offset="0.65" />
+                        <GradientStop Color="{AppThemeBinding Light=#00F6F7ED, Dark=#00001F3F}" Offset="1" />
+                    </RadialGradientBrush>
+                </Ellipse.Fill>
+            </Ellipse>
+        </AbsoluteLayout>
+        <VerticalStackLayout x:Name="Wordmark" VerticalOptions="End" Spacing="12" Padding="32,0,32,72" Opacity="0">
+            <BoxView Color="{StaticResource Accent}" WidthRequest="38" HeightRequest="4" HorizontalOptions="Start" CornerRadius="2" Margin="0,0,0,12" />
+            <Label Text="StudyFlow" TextColor="{AppThemeBinding Light={StaticResource DarkOnLightBackground}, Dark={StaticResource LightOnDarkBackground}}" FontFamily="NunitoBold" FontSize="42" />
+            <Label Text="{x:Static strings:DesignText.SplashSubtitle}" TextColor="{AppThemeBinding Light={StaticResource TextSecondaryLight}, Dark={StaticResource TextSecondaryDark}}" FontSize="16" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

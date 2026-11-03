@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml">
@@ -6,48 +6,66 @@
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
     <!-- Lime is a fill, not light-theme text: links and outlines need a darker green. -->
-    <Color x:Key="Primary">#476000</Color>
-    <Color x:Key="PrimaryDark">#C7FF2E</Color>
-    <Color x:Key="PrimaryDarkText">#0A0A0A</Color>
-    <Color x:Key="Secondary">#E9F2D6</Color>
-    <Color x:Key="SecondaryDarkText">#D5E7AB</Color>
-    <Color x:Key="Tertiary">#334718</Color>
+    <Color x:Key="Primary">#00804C</Color>
+    <Color x:Key="PrimaryDark">#DBE64C</Color>
+    <Color x:Key="PrimaryDarkText">#001F3F</Color>
+    <Color x:Key="Secondary">#E8EDDD</Color>
+    <Color x:Key="SecondaryDarkText">#C5D5E4</Color>
+    <Color x:Key="Tertiary">#1E488F</Color>
 
-    <Color x:Key="Accent">#C7FF2E</Color>
-    <Color x:Key="AccentStrong">#C7FF2E</Color>
-    <Color x:Key="ActionBackground">#C7FF2E</Color>
-    <Color x:Key="ActionText">#0A0A0A</Color>
-    <Color x:Key="SelectedBackgroundLight">#E1EBCE</Color>
-    <Color x:Key="SelectedBackgroundDark">#303820</Color>
-    <Color x:Key="TextSecondaryLight">#626970</Color>
-    <Color x:Key="TextSecondaryDark">#B0B7BE</Color>
-    <Color x:Key="BorderLight">#C9D0D6</Color>
-    <Color x:Key="BorderDark">#3A3D40</Color>
+    <Color x:Key="Accent">#DBE64C</Color>
+    <Color x:Key="AccentStrong">#DBE64C</Color>
+    <Color x:Key="ActionBackground">#DBE64C</Color>
+    <Color x:Key="ActionText">#001F3F</Color>
+    <Color x:Key="SelectedBackgroundLight">#ECF1CA</Color>
+    <Color x:Key="SelectedBackgroundDark">#193E50</Color>
+    <Color x:Key="TextSecondaryLight">#506371</Color>
+    <Color x:Key="TextSecondaryDark">#B5C9D8</Color>
+    <Color x:Key="BorderLight">#D6DFD6</Color>
+    <Color x:Key="BorderDark">#29485F</Color>
     <Color x:Key="ErrorLight">#B3261E</Color>
     <Color x:Key="ErrorDark">#FFB4AB</Color>
+    <Color x:Key="Success">#00804C</Color>
+    <Color x:Key="Progress">#74C365</Color>
+    <Color x:Key="Info">#1E488F</Color>
+    <Color x:Key="HeroStart">#001F3F</Color>
+    <Color x:Key="HeroEnd">#123E51</Color>
+    <Color x:Key="HeroText">#F6F7ED</Color>
+    <Color x:Key="HeroMuted">#C5D5E4</Color>
 
-    <Color x:Key="DarkBackground">#0A0A0A</Color>
-    <Color x:Key="LightOnDarkBackground">#F7F7F1</Color>
-    <Color x:Key="LightBackground">#F7F7F1</Color>
-    <Color x:Key="DarkOnLightBackground">#0A0A0A</Color>
+    <LinearGradientBrush x:Key="HeroBackground" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="{StaticResource HeroStart}" Offset="0" />
+        <GradientStop Color="{StaticResource HeroEnd}" Offset="1" />
+    </LinearGradientBrush>
+
+    <LinearGradientBrush x:Key="HeroBackgroundLight" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#F6F7ED" Offset="0" />
+        <GradientStop Color="#ECF1CA" Offset="0.55" />
+        <GradientStop Color="#CDE7BC" Offset="1" />
+    </LinearGradientBrush>
+
+    <Color x:Key="DarkBackground">#001F3F</Color>
+    <Color x:Key="LightOnDarkBackground">#F6F7ED</Color>
+    <Color x:Key="LightBackground">#F6F7ED</Color>
+    <Color x:Key="DarkOnLightBackground">#001F3F</Color>
 
     <Color x:Key="LightSecondaryBackground">#FFFFFF</Color>
-    <Color x:Key="DarkSecondaryBackground">#202020</Color>
+    <Color x:Key="DarkSecondaryBackground">#0B2C49</Color>
 
     <Color x:Key="White">White</Color>
     <Color x:Key="Black">Black</Color>
     <Color x:Key="Magenta">#D600AA</Color>
-    <Color x:Key="MidnightBlue">#0A0A0A</Color>
-    <Color x:Key="OffBlack">#202020</Color>
+    <Color x:Key="MidnightBlue">#001F3F</Color>
+    <Color x:Key="OffBlack">#0B2C49</Color>
 
-    <Color x:Key="Gray100">#ECEEE9</Color>
-    <Color x:Key="Gray200">#C9D0D6</Color>
-    <Color x:Key="Gray300">#AFB7BF</Color>
-    <Color x:Key="Gray400">#919BA4</Color>
-    <Color x:Key="Gray500">#6F7780</Color>
-    <Color x:Key="Gray600">#44494E</Color>
-    <Color x:Key="Gray900">#202020</Color>
-    <Color x:Key="Gray950">#0F0F0F</Color>
+    <Color x:Key="Gray100">#ECF0E7</Color>
+    <Color x:Key="Gray200">#D6DFD6</Color>
+    <Color x:Key="Gray300">#BAC9CE</Color>
+    <Color x:Key="Gray400">#A7BDCC</Color>
+    <Color x:Key="Gray500">#607482</Color>
+    <Color x:Key="Gray600">#405765</Color>
+    <Color x:Key="Gray900">#12334B</Color>
+    <Color x:Key="Gray950">#001F3F</Color>
 
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDark}"/>

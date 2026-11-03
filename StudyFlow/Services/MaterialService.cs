@@ -17,14 +17,19 @@ namespace StudyFlow.Services
         private const int PhotoQuality = 85;
 
         private readonly MaterialRepository _materialRepository;
+        private readonly YandexDiskClient _yandexDisk;
+        private readonly YandexAuthService _yandexAuth;
 
-        public MaterialService(MaterialRepository materialRepository)
+        public MaterialService(MaterialRepository materialRepository, YandexDiskClient yandexDisk, YandexAuthService yandexAuth)
         {
             _materialRepository = materialRepository;
+            _yandexDisk = yandexDisk;
+            _yandexAuth = yandexAuth;
         }
 
         /// <summary>
         /// Asks what to add (files, photos, video, a camera shot or a link) and attaches it to the subject.
+        /// Pass <paramref name="subjectId"/> 0 to store the material outside any space.
         /// </summary>
         /// <returns>The number of materials added.</returns>
         public async Task<int> AddWithPromptAsync(int subjectId)
@@ -201,6 +206,7 @@ namespace StudyFlow.Services
 
         /// <summary>
         /// Opens a file in the app registered for its type, or a link in the browser.
+        /// Cloud-only materials are downloaded from Disk into the local cache first.
         /// </summary>
         public async Task OpenAsync(Material material)
         {
@@ -210,10 +216,25 @@ namespace StudyFlow.Services
                 return;
             }
 
-            if (!File.Exists(material.FullPath))
+            if (!material.HasLocalFile)
+                await EnsureLocalFileAsync(material);
+
+            if (!material.HasLocalFile)
                 throw new FileNotFoundException(string.Format(AppResources.MaterialFileMissing, material.Title));
 
             await Launcher.Default.OpenAsync(new OpenFileRequest(material.Title, new ReadOnlyFile(material.FullPath)));
+        }
+
+        private async Task EnsureLocalFileAsync(Material material)
+        {
+            if (material.RemotePath.Length == 0 || !_yandexAuth.IsSignedIn)
+                return;
+
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+                throw new InvalidOperationException(AppResources.MaterialCloudOffline);
+
+            Directory.CreateDirectory(Path.GetDirectoryName(material.FullPath)!);
+            await _yandexDisk.DownloadAsync(material.RemotePath, material.FullPath);
         }
 
         /// <summary>

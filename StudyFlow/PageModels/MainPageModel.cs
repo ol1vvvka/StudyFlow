@@ -7,7 +7,6 @@ namespace StudyFlow.PageModels
 {
     public partial class MainPageModel : ObservableObject, ITaskPageModel, IMaterialPageModel, IRecipient<CloudSyncFinishedMessage>
     {
-        private const string SeededKey = "studyflow_seeded";
         private const int RecentMaterialsCount = 5;
 
         private bool _isNavigatedTo;
@@ -50,6 +49,9 @@ namespace StudyFlow.PageModels
 
         public bool HasRecentMaterials => RecentMaterials.Count > 0;
 
+        [RelayCommand]
+        private Task OpenCalendar() => Shell.Current.GoToAsync("//calendar");
+
         public MainPageModel(SeedDataService seedDataService, SubjectRepository subjectRepository,
             TaskRepository taskRepository, MaterialRepository materialRepository,
             MaterialService materialService, CloudBackupService cloudBackup, ModalErrorHandler errorHandler)
@@ -90,14 +92,10 @@ namespace StudyFlow.PageModels
 
         private async Task InitData(SeedDataService seedDataService)
         {
-            bool isSeeded = Preferences.Default.ContainsKey(SeededKey);
-
-            if (!isSeeded)
-            {
+            if (!Preferences.Default.ContainsKey(SeedDataService.SeededKey))
                 await seedDataService.LoadSeedDataAsync();
-            }
 
-            Preferences.Default.Set(SeededKey, true);
+            Preferences.Default.Set(SeedDataService.SeededKey, true);
 
             // Restores the Yandex session first, so lists know whether to show cloud icons.
             await _cloudBackup.InitializeAsync();

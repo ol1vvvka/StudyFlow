@@ -5,7 +5,7 @@ namespace StudyFlow.Models
     /// </summary>
     public static class SubjectPalette
     {
-        public const string DefaultColor = "#C7FF2E";
+        public const string DefaultColor = "#DBE64C";
 
         public static IReadOnlyList<ColorData> ColorOptions { get; } =
         [

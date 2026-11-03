@@ -15,6 +15,15 @@ namespace StudyFlow
                 .ConfigureSyncfusionToolkit()
                 .ConfigureMauiHandlers(handlers =>
                 {
+#if ANDROID
+                    handlers.AddHandler<TimePicker, ThemedTimePickerHandler>();
+                    handlers.AddHandler<Shell, StudyFlowShellRenderer>();
+                    Microsoft.Maui.Handlers.EditorHandler.Mapper.AppendToMapping("NoteBody", (handler, view) =>
+                    {
+                        if (view is Editor { ClassId: "NoteBody" })
+                            handler.PlatformView.BackgroundTintList = Android.Content.Res.ColorStateList.ValueOf(Android.Graphics.Color.Transparent);
+                    });
+#endif
 #if WINDOWS
     				Microsoft.Maui.Controls.Handlers.Items.CollectionViewHandler.Mapper.AppendToMapping("KeyboardAccessibleCollectionView", (handler, view) =>
     				{

@@ -6,26 +6,37 @@ namespace StudyFlow.Data
 {
     public class SeedDataService
     {
+        public const string SeededKey = "studyflow_seeded";
+        public const string DemoActiveKey = "studyflow_demo_active";
+
         private readonly SubjectRepository _subjectRepository;
         private readonly TaskRepository _taskRepository;
         private readonly TagRepository _tagRepository;
         private readonly NoteRepository _noteRepository;
+        private readonly CalendarRepository _calendarRepository;
+        private readonly RemoteDeletionRepository _deletionRepository;
         private readonly string _seedDataFilePath = "SeedData.json";
         private readonly ILogger<SeedDataService> _logger;
 
         public SeedDataService(SubjectRepository subjectRepository, TaskRepository taskRepository, TagRepository tagRepository,
-            NoteRepository noteRepository, ILogger<SeedDataService> logger)
+            NoteRepository noteRepository, CalendarRepository calendarRepository, RemoteDeletionRepository deletionRepository,
+            ILogger<SeedDataService> logger)
         {
             _subjectRepository = subjectRepository;
             _taskRepository = taskRepository;
             _tagRepository = tagRepository;
             _noteRepository = noteRepository;
+            _calendarRepository = calendarRepository;
+            _deletionRepository = deletionRepository;
             _logger = logger;
         }
+
+        public static bool IsDemoActive => Preferences.Default.Get(DemoActiveKey, false);
 
         public async Task LoadSeedDataAsync()
         {
             await ClearTablesAsync();
+            DeleteMaterialFiles();
 
             await using Stream templateStream = await FileSystem.OpenAppPackageFileAsync(_seedDataFilePath);
 
@@ -83,12 +94,28 @@ namespace StudyFlow.Data
                         }
                     }
                 }
+
+                Preferences.Default.Set(SeededKey, true);
+                Preferences.Default.Set(DemoActiveKey, true);
             }
             catch (Exception e)
             {
                 _logger.LogError(e, "Error saving seed data");
                 throw;
             }
+        }
+
+        /// <summary>
+        /// Removes all local study data without loading the demo set again.
+        /// </summary>
+        public async Task ClearAllDataAsync()
+        {
+            await ClearTablesAsync();
+            await _calendarRepository.ClearAllAsync();
+            await _deletionRepository.DropTableAsync();
+            DeleteMaterialFiles();
+            Preferences.Default.Set(SeededKey, true);
+            Preferences.Default.Set(DemoActiveKey, false);
         }
 
         private async Task ClearTablesAsync()
@@ -102,6 +129,12 @@ namespace StudyFlow.Data
             {
                 _logger.LogError(e, "Error clearing tables");
             }
+        }
+
+        private static void DeleteMaterialFiles()
+        {
+            if (Directory.Exists(Constants.MaterialsDirectory))
+                Directory.Delete(Constants.MaterialsDirectory, recursive: true);
         }
     }
 }

@@ -18,24 +18,31 @@
                 Command="{Binding AppearingCommand}" />
     </ContentPage.Behaviors>
 
-    <Grid RowDefinitions="Auto,*" Padding="{StaticResource LayoutPadding}" RowSpacing="{StaticResource LayoutSpacing}">
-        <SearchBar
-            Text="{Binding SearchText}"
-            Placeholder="{x:Static strings:AppResources.MaterialsSearch}"
-            SemanticProperties.Description="{x:Static strings:AppResources.MaterialsSearch}" />
+    <Grid>
+        <Grid RowDefinitions="Auto,*" Padding="{StaticResource LayoutPadding}" RowSpacing="{StaticResource LayoutSpacing}">
+            <SearchBar
+                Text="{Binding SearchText}"
+                Placeholder="{x:Static strings:AppResources.MaterialsSearch}"
+                SemanticProperties.Description="{x:Static strings:AppResources.MaterialsSearch}" />
 
-        <CollectionView Grid.Row="1" ItemsSource="{Binding Materials}" SelectionMode="None">
-            <CollectionView.EmptyView>
-                <Label Text="{Binding EmptyText}" Style="{StaticResource Body2}" Margin="0,20" />
-            </CollectionView.EmptyView>
-            <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="7.5" />
-            </CollectionView.ItemsLayout>
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:Material">
-                    <controls:MaterialView />
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+            <CollectionView Grid.Row="1" ItemsSource="{Binding Materials}" SelectionMode="None">
+                <CollectionView.EmptyView>
+                    <Label Text="{Binding EmptyText}" Style="{StaticResource Body2}" Margin="0,20" />
+                </CollectionView.EmptyView>
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="7.5" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:Material">
+                        <controls:MaterialView />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+
+        <controls:AddButton
+            Command="{Binding AddMaterialCommand}"
+            SemanticProperties.Description="{x:Static strings:AppResources.AddMaterial}"
+            ToolTipProperties.Text="{x:Static strings:AppResources.AddMaterial}" />
     </Grid>
 </ContentPage>

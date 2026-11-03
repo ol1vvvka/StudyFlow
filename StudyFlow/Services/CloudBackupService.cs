@@ -16,6 +16,7 @@ namespace StudyFlow.Services
     public class CloudBackupService : IRecipient<NotesChangedMessage>, IRecipient<MaterialsChangedMessage>
     {
         public const string WifiOnlyKey = "cloud_wifi_only";
+        public const string StorageModeKey = "cloud_storage_mode";
         private const string LastSyncKey = "cloud_last_sync";
 
         // Folder names are part of the data layout on Disk, so they are not translated.
@@ -63,6 +64,16 @@ namespace StudyFlow.Services
             set
             {
                 Preferences.Default.Set(WifiOnlyKey, value);
+                RequestSync();
+            }
+        }
+
+        public CloudStorageMode StorageMode
+        {
+            get => (CloudStorageMode)Preferences.Default.Get(StorageModeKey, (int)CloudStorageMode.DeviceAndCloud);
+            set
+            {
+                Preferences.Default.Set(StorageModeKey, (int)value);
                 RequestSync();
             }
         }
@@ -182,6 +193,9 @@ namespace StudyFlow.Services
                         error => _materialRepository.UpdateSyncStateAsync(material, material.RemotePath, SyncStatus.Error, error));
                 }
 
+                if (StorageMode == CloudStorageMode.CloudOnly)
+                    await PurgeLocalSyncedFilesAsync();
+
                 Preferences.Default.Set(LastSyncKey, DateTime.UtcNow);
             }
             catch (Exception e) when (e is HttpRequestException or OperationCanceledException
@@ -268,6 +282,33 @@ namespace StudyFlow.Services
             }
 
             await _materialRepository.UpdateSyncStateAsync(material, target, SyncStatus.Synced, string.Empty);
+
+            // Cloud-only: free device space after a successful mirror; metadata and RemotePath stay.
+            if (StorageMode == CloudStorageMode.CloudOnly)
+                DeleteLocalFile(material.FullPath);
+        }
+
+        private async Task PurgeLocalSyncedFilesAsync()
+        {
+            var materials = await _materialRepository.ListAsync();
+            foreach (var material in materials)
+            {
+                if (material.IsLink || material.SyncStatus != SyncStatus.Synced || material.RemotePath.Length == 0)
+                    continue;
+                if (material.HasLocalFile)
+                    DeleteLocalFile(material.FullPath);
+            }
+        }
+
+        private static void DeleteLocalFile(string fullPath)
+        {
+            if (fullPath.Length == 0 || !File.Exists(fullPath))
+                return;
+
+            File.Delete(fullPath);
+            var folder = Path.GetDirectoryName(fullPath);
+            if (folder is not null && Directory.Exists(folder) && !Directory.EnumerateFileSystemEntries(folder).Any())
+                Directory.Delete(folder);
         }
 
         /// <summary>

@@ -14,7 +14,7 @@ namespace StudyFlow.Services.Yandex
         public const string UserInfoUrl = "https://login.yandex.ru/info?format=json";
         public const string DiskApiUrl = "https://cloud-api.yandex.net/v1/disk/";
 
-        public const string CallbackScheme = "ru.studyflow.app";
+        public const string CallbackScheme = "ru.ol1vvvka.studyflow";
 
         // WebAuthenticator does not work on Windows, so there the browser redirects to a local listener on this port.
         public const int LoopbackPort = 47563;

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="StudyFlow.TabLabel" parent="android:style/TextAppearance.Material.Caption">
+    <item name="android:textSize">11sp</item>
+    <item name="android:textStyle">normal</item>
+  </style>
+  <style name="StudyFlow.TimeDialog.Light" parent="android:style/Theme.Material.Light.Dialog.Alert">
+    <item name="android:colorAccent">#00804C</item>
+    <item name="android:colorBackground">#F6F7ED</item>
+    <item name="android:textColorPrimary">#001F3F</item>
+    <item name="android:textColorSecondary">#506371</item>
+  </style>
+  <style name="StudyFlow.TimeDialog.Dark" parent="android:style/Theme.Material.Dialog.Alert">
+    <item name="android:colorAccent">#DBE64C</item>
+    <item name="android:colorBackground">#0B2C49</item>
+    <item name="android:textColorPrimary">#F6F7ED</item>
+    <item name="android:textColorSecondary">#B5C9D8</item>
+    <item name="android:timePickerStyle">@style/StudyFlow.Clock.Dark</item>
+  </style>
+  <style name="StudyFlow.Clock.Dark" parent="android:style/Widget.Material.TimePicker">
+    <item name="android:headerBackground">#001F3F</item>
+    <item name="android:numbersBackgroundColor">#123E51</item>
+    <item name="android:numbersSelectorColor">#DBE64C</item>
+    <item name="android:numbersTextColor">@color/clock_numbers</item>
+    <item name="android:numbersInnerTextColor">@color/clock_numbers</item>
+  </style>
+</resources>
