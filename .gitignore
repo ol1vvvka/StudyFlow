@@ -24,12 +24,19 @@ TestResults/
 *.db-shm
 *.db3-wal
 *.db3-shm
+# Подпись Android и прочие секреты — только локально / в запасной копии вне Git
+secrets/
+signing/
 *.keystore
+*.keystore.pass
 *.jks
+*.bks
 *.pfx
 *.p12
 *.key
 *.pem
+keystore.properties
+**/keystore.properties
 .env
 .env.*
 !.env.example
