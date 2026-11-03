@@ -1,0 +1,22 @@
+<!--
+  Локальные настройки подписи Release APK.
+  Скопируйте в Directory.Build.props рядом с этим файлом (он в .gitignore) и заполните пути.
+  Пароли лучше через env: — тогда они не попадают в логи сборки.
+
+  Создание keystore один раз (JDK keytool):
+
+  keytool -genkeypair -v -keystore secrets/studyflow.keystore -alias studyflow `
+    -keyalg RSA -keysize 2048 -validity 10000 `
+    -dname "CN=StudyFlow, OU=Dev, O=ol1vvvka, L=, ST=, C=RU"
+
+  Затем: $env:STUDYFLOW_KEYSTORE_PASS = 'ваш-пароль'
+-->
+<Project>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <AndroidKeyStore>true</AndroidKeyStore>
+    <AndroidSigningKeyStore>$(MSBuildThisFileDirectory)secrets\studyflow.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyAlias>studyflow</AndroidSigningKeyAlias>
+    <AndroidSigningStorePass>env:STUDYFLOW_KEYSTORE_PASS</AndroidSigningStorePass>
+    <AndroidSigningKeyPass>env:STUDYFLOW_KEYSTORE_PASS</AndroidSigningKeyPass>
+  </PropertyGroup>
+</Project>
